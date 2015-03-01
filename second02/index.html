@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var num = 0;
+
+		function increment() {
+			num++;
+			if ( num > 10 ) {
+				num = 1;
+			} 
+			console.log(num);
+		};
+		for ( var i = 0; i < 100; i++ ){
+			increment(); 
+		}
+
+	</script>
+</body>
+</html>

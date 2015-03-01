@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#target {
+			width: 100px;
+			height: 100px;
+			background-color: #000;
+			color: #FFF;
+		}
+	</style>
+</head>
+<body>
+	<input type="button" id="result" value="クリック数" >
+	<div id="target"></div>
+	<script>
+		var clickCounter = { 
+			num : 0,
+			target : document.getElementById('target'),
+			init : function () {
+			// targetに対してイヘントハンドラ設定
+			// ハンドラ内でクリック回数を保存 
+				var element = this;
+				this.target.onclick = function () {
+					element.num++;
+					this.innerHTML = element.num;
+				}
+			},
+			display : function () {
+			// 保存したクリック回数を表示
+				alert(this.num);
+			}
+		};
+
+		clickCounter.init();
+		document.getElementById('result').onclick = function () {
+			clickCounter.display();
+		}
+	</script>
+</body>
+</html>

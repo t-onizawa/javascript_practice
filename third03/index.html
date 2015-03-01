@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var compare = {
+			set : function(data){
+				this.data = data;
+			},
+			getMax : function(){
+				// 保存した配列の要素の中で最大値を返す
+				var maxNum = this.data[0];
+
+				for ( var i = 0; i < this.data.length; i++ ) {
+					if ( maxNum < this.data[i] ) {
+						maxNum = this.data[i];
+					}
+				}
+				return maxNum;
+
+			},
+			getMin : function(){
+				// 保存した配列の要素の中で最小値を返す 
+				var minNum = this.data[0];
+
+				for ( var i = 0; i < this.data.length; i++ ) {
+					if ( minNum > this.data[i] ) {
+						minNum = this.data[i];
+					}
+				}
+				return minNum;
+			}
+
+		};
+		compare.set([6, 1, 8, 5, 2]);
+		compare.getMax();
+		console.log(compare.getMax()); // 8と表示 
+		console.log(compare.getMin()); // 1と表示
+	</script>
+</body>
+</html>

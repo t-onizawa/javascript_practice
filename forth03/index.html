@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="container"> 
+		<span></span> 
+		<div></div> 
+		<textarea></textarea>
+		<span></span> 
+		<div></div> 
+		<textarea></textarea>
+	</div>
+	<script>
+		var container =  document.getElementById('container');
+		var target = container.children;
+		
+		for ( i = 0; i < target.length; i++ ) {
+			var tagName = target[i].tagName;
+			var text = document.createTextNode('このタグは' + tagName.toLowerCase() + 'です');
+			target[i].appendChild(text);
+		}
+	</script>
+</body>
+</html>

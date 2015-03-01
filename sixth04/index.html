@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="button" value="開始" id="start">
+	<input type="button" value="停止" id="stop">
+	<script>
+	var Measure = function () {
+		this.start = function () {
+			var date = new Date;
+			var time = date.getTime();
+			this.startTime = time;
+		},
+		this.stop = function () {
+			var date = new Date;
+			var time = date.getTime();
+			this.stopTime = time;
+			console.log(this.stopTime - this.startTime);
+		}
+	}
+
+	var measure = new Measure();
+
+	document.getElementById('start').onclick = function () {
+		measure.start();
+	};
+	document.getElementById('stop').onclick = function () {
+		measure.stop();
+	};
+	</script>
+</body>
+</html>

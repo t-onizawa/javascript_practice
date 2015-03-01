@@ -1,0 +1,23 @@
+@charset "utf-8";
+
+.operation { margin:20px; }
+.operation input { margin-right:10px; } 
+#employee_table { 
+	border:solid 1px #808080; 
+	border-collapse: collapse; 
+	margin: 20px;
+}
+#employee_table th {
+	border:solid 1px #808080; 
+	background-color: #E0E0E0; 
+	width: 150px;
+	padding: 3px 5px; 
+	text-align:center;
+}
+#employee_table td {
+	border:solid 1px #808080; 
+	padding:3px 5px; text-align:left;
+}
+#employee_table td:last-child {
+	text-align:center; 
+}

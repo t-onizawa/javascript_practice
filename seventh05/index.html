@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var data = [
+			'apple orange lemon banana', 
+			'pear banana orange strawberry', 
+			'banana orange strawberry pear'
+		];
+		var fruit = function ( data ) {
+			for ( var i = 0; i < data.length; i++ ) {
+				var a = data[i].indexOf('orange');
+				var b = data[i].indexOf('pear');
+				var c = 'pear'.length;
+				if ( a < b) {
+					console.log(data[i].substring(a, b+c));
+				}
+			}
+		};
+		fruit(data);
+	</script>
+</body>
+</html>

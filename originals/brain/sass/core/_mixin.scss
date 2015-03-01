@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+@mixin box-shadow($value:none) {
+    @include exp(box-shadow, $value);
+}
+@mixin border-box {
+    @include exp(box-sizing, border-box);
+}
+
+@mixin ti {
+	text-indent: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+}
+@mixin -ti {
+	text-indent: -9999px;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+@mixin gradient($from, $to) {
+	background-color: $from;
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$from), color-stop(100%,$to));
+	background-image: -webkit-linear-gradient(to bottom, $from 0%, $to 100%);
+	background-image: -moz-linear-gradient(top,  $from 0%,$to  100%);
+	background-image: linear-gradient(to bottom, $from 0%, $to 100%);
+}

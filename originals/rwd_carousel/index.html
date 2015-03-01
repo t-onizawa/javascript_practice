@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/rwdCarousel.css">
+	<link rel="stylesheet" href="css/icon.css">
+</head>
+<body>
+<div class="wrapper">
+	<div class="jsc-carousel carousel-container">
+		<div class="jsc-carousel-contents carousel">
+			<ul class="carousel-list">
+				<li>
+					<i class="i i-iphone"></i><span class="txt">iPhone</span>
+					<p class="i-f" data-icon="">This is Icon Font</p>
+				</li>
+				<li>
+					<i class="i i-refresh"></i><span class="txt">Refresh</span>
+					<p class="i-f" data-icon="">This is Icon Font</p>
+				</li>
+				<li>
+					<i class="i i-calendar"></i><span class="txt">Calendar</span>
+					<p class="i-f" data-icon="">This is Icon Font</p>
+				</li>
+				<li>
+					<i class="i i-facebook"></i><span class="txt">Facebook</span>
+					<p class="i-f" data-icon="">This is Icon Font</p>
+				</li>
+				<li>
+					<i class="i i-mail"></i><span class="txt">Mail</span>
+					<p class="i-f" data-icon="">This is Icon Font</p>
+				</li>
+				<li>
+					<i class="i i-map"></i><span class="txt">Map</span>
+					<p class="i-f" data-icon="">This is Icon Font</p>
+				</li>
+			</ul>
+			<a href="javascript:void(0);" class="jsc-carousel-prev btn-prev btn-carousel">＜</a>
+			<a href="javascript:void(0);" class="jsc-carousel-next btn-next btn-carousel">＞</a>
+		</div>
+	</div>
+</div>
+
+<script src="/jquery/jquery.js"></script>
+<script src="js/rwdCarousel.js"></script>
+<script>
+	$(function () {
+		rwdCarousel.init({
+			target: '.jsc-carousel',
+
+			swipe: true,
+			swipeTrueWidth: 750,
+			spIndicator: true,
+			spClickButton: true,
+			spTapDisplaySlide: false,
+			landscapeResize: true,
+
+			pcLoop: true,
+			pcLoopDuraion: 3000,
+			pcAnimationDuration: 500,
+			pcIndicator: true,
+			pcResize: true,
+
+			touchSwipeDirectory: 'js/jquery.touchSwipe.js',
+			spSwipeDirectory: 'js/spSwipe.js',
+			pcCarouselScriptDirectory: 'js/carousel.js'
+		});
+		
+	});
+</script>
+</body>
+</html>

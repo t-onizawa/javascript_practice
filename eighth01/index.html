@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+<script>
+	var measure = function () { 
+		var startTime = new Date().getTime();
+		return {
+			stop : function(){ 
+				if(!startTime){
+					return; 
+				}
+				console.log(new Date().getTime() - startTime); 
+			}
+		}
+	};
+	var answer = measure();
+	answer.stop();
+</script>
+</body>
+</html>

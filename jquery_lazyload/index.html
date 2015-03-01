@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.wrapper {
+			width: 960px;
+			margin: 0 auto;
+		}
+		.img-list {
+			margin-right: -30px;
+			padding: 0;
+		}
+		.img-list li {
+			list-style: none;
+			background: url(./img/loading.gif) no-repeat center center;
+			width: 256px;
+			height: 256px;
+			padding: 22px;
+			-webkit-box-shadow: 0 1px 2px #AAA;
+			        box-shadow: 0 1px 2px #AAA;
+			float: left;
+			margin-top: 30px;
+			margin-right: 30px;
+		}
+		.img-list img {
+			vertical-align: middle;
+			opacity: 0;
+		}
+		.cf:after {
+			display: block;
+			content: "";
+			clear: both;
+			height: 0;
+		}
+		.zoom-box {
+			position: fixed;
+			background-color: #FFF;
+			-webkit-box-shadow: 0 1px 2px #AAA;
+			        box-shadow: 0 1px 2px #AAA;
+			top: 50%;
+			left: 50%;
+			margin: -330px 0 0 -330px;
+			width: 660px;
+			padding: 30px 30px 10px;
+			-webkit-box-sizing: border-box;
+			   -moz-box-sizing: border-box;
+			        box-sizing: border-box;
+			display: none;
+			z-index: 100;
+		}
+		.zoom-box img {
+			width: 600px;
+			height: 600px;
+			display: block;
+		}
+		.zoom-caption {
+			margin: 0;
+			font-weight: bold;
+			letter-spacing: 3;
+			padding: 5px;
+			font-size: 18px;
+		}
+		.zoom-close {
+			display: block;
+			position: absolute;
+			left: 630px;
+			top: -10px;
+			color: #FFF;
+			text-decoration: none;
+			background-color: #666;
+			padding: 2px 10px 7px;
+			font-size: 30px;
+			-webkit-border-radius: 3px;
+			        border-radius: 3px;
+			line-height: 1;
+			-webkit-transform: rotate(0deg);
+			-moz-transform: rotate(0deg);
+			transform: rotate(0deg);
+			-webkit-transition: transform .3s ease-in-out 0;
+			-moz-transition: transform .3s ease-in-out 0;
+			transition: -webkit-transform .3s ease-in-out 0;
+			transition: -moz-transform .3s ease-in-out 0;
+			transition: transform .3s ease-in-out 0;
+		}
+		.zoom-close.jsc-rotate {
+			-webkit-transform: rotate(720deg);
+			-moz-transform: rotate(720deg);
+			transform: rotate(720deg);
+		}
+		.zoom-arrow {
+			display: block;
+			position: absolute;
+			top: 50%;
+			margin-top: -20px;
+			background-color: #FFF;
+			opacity: .7;
+			color: #111;
+			font-weight: bold;
+			font-size: 24px;
+			width: 80px;
+			height: 80px;
+			text-decoration: none;
+			line-height: 80px;
+			text-align: center;
+			-webkit-border-radius: 40px;
+			        border-radius: 40px;
+			-webkit-transition: all .1s linear 0;
+			   -moz-transition: all .1s linear 0;
+			        transition: all .1s linear 0;
+		}
+		.zoom-arrow:hover {
+			background-color: #D37C85;
+			color: #FFF;
+			opacity: 1;
+		}
+		.zoom-prev {
+			left: -100px;
+		}
+		.zoom-next {
+			right: -100px;
+		}
+		.overlay {
+			position: fixed;
+			background-color: #000;
+			opacity: 0;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			display: none;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrapper" id ="wrapper">
+		<ul class="img-list jsc-img-list cf">
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal1.jpeg" alt="吾輩は犬である！ animal ナンバー1"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal2.jpeg" alt="吾輩は犬である！ animal ナンバー2"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal3.jpeg" alt="吾輩は犬である！ animal ナンバー3"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal4.jpeg" alt="吾輩は犬である！ animal ナンバー4"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal5.jpeg" alt="吾輩は犬である！ animal ナンバー5"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal6.jpeg" alt="吾輩は犬である！ animal ナンバー6"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal7.jpeg" alt="吾輩は犬である！ animal ナンバー7"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal8.jpeg" alt="吾輩は犬である！ animal ナンバー8"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal9.jpeg" alt="吾輩は犬である！ animal ナンバー9"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal10.jpeg" alt="吾輩は犬である！ animal ナンバー10"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal1.jpeg" alt="吾輩は犬である！ animal ナンバー11"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal2.jpeg" alt="吾輩は犬である！ animal ナンバー12"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal3.jpeg" alt="吾輩は犬である！ animal ナンバー13"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal4.jpeg" alt="吾輩は犬である！ animal ナンバー14"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal5.jpeg" alt="吾輩は犬である！ animal ナンバー15"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal6.jpeg" alt="吾輩は犬である！ animal ナンバー16"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal7.jpeg" alt="吾輩は犬である！ animal ナンバー17"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal8.jpeg" alt="吾輩は犬である！ animal ナンバー18"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal9.jpeg" alt="吾輩は犬である！ animal ナンバー19"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal10.jpeg" alt="吾輩は犬である！ animal ナンバー20"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal1.jpeg" alt="吾輩は犬である！ animal ナンバー21"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal2.jpeg" alt="吾輩は犬である！ animal ナンバー22"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal3.jpeg" alt="吾輩は犬である！ animal ナンバー23"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal4.jpeg" alt="吾輩は犬である！ animal ナンバー24"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal5.jpeg" alt="吾輩は犬である！ animal ナンバー25"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal6.jpeg" alt="吾輩は犬である！ animal ナンバー26"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal7.jpeg" alt="吾輩は犬である！ animal ナンバー27"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal8.jpeg" alt="吾輩は犬である！ animal ナンバー28"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal9.jpeg" alt="吾輩は犬である！ animal ナンバー29"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal10.jpeg" alt="吾輩は犬である！ animal ナンバー30"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal1.jpeg" alt="吾輩は犬である！ animal ナンバー31"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal2.jpeg" alt="吾輩は犬である！ animal ナンバー32"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal3.jpeg" alt="吾輩は犬である！ animal ナンバー33"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal4.jpeg" alt="吾輩は犬である！ animal ナンバー34"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal5.jpeg" alt="吾輩は犬である！ animal ナンバー35"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal6.jpeg" alt="吾輩は犬である！ animal ナンバー36"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal7.jpeg" alt="吾輩は犬である！ animal ナンバー37"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal8.jpeg" alt="吾輩は犬である！ animal ナンバー38"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal9.jpeg" alt="吾輩は犬である！ animal ナンバー39"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal10.jpeg" alt="吾輩は犬である！ animal ナンバー40"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal1.jpeg" alt="吾輩は犬である！ animal ナンバー41"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal2.jpeg" alt="吾輩は犬である！ animal ナンバー42"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal3.jpeg" alt="吾輩は犬である！ animal ナンバー43"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal4.jpeg" alt="吾輩は犬である！ animal ナンバー44"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal5.jpeg" alt="吾輩は犬である！ animal ナンバー45"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal6.jpeg" alt="吾輩は犬である！ animal ナンバー46"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal7.jpeg" alt="吾輩は犬である！ animal ナンバー47"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal8.jpeg" alt="吾輩は犬である！ animal ナンバー48"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal9.jpeg" alt="吾輩は犬である！ animal ナンバー49"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal10.jpeg" alt="吾輩は犬である！ animal ナンバー50"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal1.jpeg" alt="吾輩は犬である！ animal ナンバー51"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal2.jpeg" alt="吾輩は犬である！ animal ナンバー52"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal3.jpeg" alt="吾輩は犬である！ animal ナンバー53"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal4.jpeg" alt="吾輩は犬である！ animal ナンバー54"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal5.jpeg" alt="吾輩は犬である！ animal ナンバー55"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal6.jpeg" alt="吾輩は犬である！ animal ナンバー56"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal7.jpeg" alt="吾輩は犬である！ animal ナンバー57"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal8.jpeg" alt="吾輩は犬である！ animal ナンバー58"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal9.jpeg" alt="吾輩は犬である！ animal ナンバー59"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal10.jpeg" alt="吾輩は犬である！ animal ナンバー60"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal1.jpeg" alt="吾輩は犬である！ animal ナンバー61"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal2.jpeg" alt="吾輩は犬である！ animal ナンバー62"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal3.jpeg" alt="吾輩は犬である！ animal ナンバー63"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal4.jpeg" alt="吾輩は犬である！ animal ナンバー64"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal5.jpeg" alt="吾輩は犬である！ animal ナンバー65"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal6.jpeg" alt="吾輩は犬である！ animal ナンバー66"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal7.jpeg" alt="吾輩は犬である！ animal ナンバー67"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal8.jpeg" alt="吾輩は犬である！ animal ナンバー68"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal9.jpeg" alt="吾輩は犬である！ animal ナンバー69"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal10.jpeg" alt="吾輩は犬である！ animal ナンバー70"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal1.jpeg" alt="吾輩は犬である！ animal ナンバー71"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal2.jpeg" alt="吾輩は犬である！ animal ナンバー72"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal3.jpeg" alt="吾輩は犬である！ animal ナンバー73"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal4.jpeg" alt="吾輩は犬である！ animal ナンバー74"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal5.jpeg" alt="吾輩は犬である！ animal ナンバー75"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal6.jpeg" alt="吾輩は犬である！ animal ナンバー76"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal7.jpeg" alt="吾輩は犬である！ animal ナンバー77"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal8.jpeg" alt="吾輩は犬である！ animal ナンバー78"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal9.jpeg" alt="吾輩は犬である！ animal ナンバー79"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal10.jpeg" alt="吾輩は犬である！ animal ナンバー80"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal1.jpeg" alt="吾輩は犬である！ animal ナンバー81"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal2.jpeg" alt="吾輩は犬である！ animal ナンバー82"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal3.jpeg" alt="吾輩は犬である！ animal ナンバー83"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal4.jpeg" alt="吾輩は犬である！ animal ナンバー84"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal5.jpeg" alt="吾輩は犬である！ animal ナンバー85"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal6.jpeg" alt="吾輩は犬である！ animal ナンバー86"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal7.jpeg" alt="吾輩は犬である！ animal ナンバー87"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal8.jpeg" alt="吾輩は犬である！ animal ナンバー88"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal9.jpeg" alt="吾輩は犬である！ animal ナンバー89"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal10.jpeg" alt="吾輩は犬である！ animal ナンバー90"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal1.jpeg" alt="吾輩は犬である！ animal ナンバー91"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal2.jpeg" alt="吾輩は犬である！ animal ナンバー92"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal3.jpeg" alt="吾輩は犬である！ animal ナンバー93"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal4.jpeg" alt="吾輩は犬である！ animal ナンバー94"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal5.jpeg" alt="吾輩は犬である！ animal ナンバー95"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal6.jpeg" alt="吾輩は犬である！ animal ナンバー96"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal7.jpeg" alt="吾輩は犬である！ animal ナンバー97"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal8.jpeg" alt="吾輩は犬である！ animal ナンバー98"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal9.jpeg" alt="吾輩は犬である！ animal ナンバー99"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal10.jpeg" alt="吾輩は犬である！ animal ナンバー100"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal1.jpeg" alt="吾輩は犬である！ animal ナンバー101"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal2.jpeg" alt="吾輩は犬である！ animal ナンバー102"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal3.jpeg" alt="吾輩は犬である！ animal ナンバー103"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal4.jpeg" alt="吾輩は犬である！ animal ナンバー104"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal5.jpeg" alt="吾輩は犬である！ animal ナンバー105"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal6.jpeg" alt="吾輩は犬である！ animal ナンバー106"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal7.jpeg" alt="吾輩は犬である！ animal ナンバー107"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal8.jpeg" alt="吾輩は犬である！ animal ナンバー108"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal9.jpeg" alt="吾輩は犬である！ animal ナンバー109"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal10.jpeg" alt="吾輩は犬である！ animal ナンバー110"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal1.jpeg" alt="吾輩は犬である！ animal ナンバー111"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal2.jpeg" alt="吾輩は犬である！ animal ナンバー112"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal3.jpeg" alt="吾輩は犬である！ animal ナンバー113"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal4.jpeg" alt="吾輩は犬である！ animal ナンバー114"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal5.jpeg" alt="吾輩は犬である！ animal ナンバー115"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal6.jpeg" alt="吾輩は犬である！ animal ナンバー116"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal7.jpeg" alt="吾輩は犬である！ animal ナンバー117"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal8.jpeg" alt="吾輩は犬である！ animal ナンバー118"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal9.jpeg" alt="吾輩は犬である！ animal ナンバー119"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal10.jpeg" alt="吾輩は犬である！ animal ナンバー120"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal1.jpeg" alt="吾輩は犬である！ animal ナンバー121"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal2.jpeg" alt="吾輩は犬である！ animal ナンバー122"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal3.jpeg" alt="吾輩は犬である！ animal ナンバー123"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal4.jpeg" alt="吾輩は犬である！ animal ナンバー124"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal5.jpeg" alt="吾輩は犬である！ animal ナンバー125"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal6.jpeg" alt="吾輩は犬である！ animal ナンバー126"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal7.jpeg" alt="吾輩は犬である！ animal ナンバー127"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal8.jpeg" alt="吾輩は犬である！ animal ナンバー128"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal9.jpeg" alt="吾輩は犬である！ animal ナンバー129"></a></li>
+			<li><a href="javascript:void(0);"><img src="" data-src="./img/animal10.jpeg" alt="吾輩は犬である！ animal ナンバー130"></a></li>
+		</ul>
+	<div id="jsi-zoom-box" class="zoom-box">
+		<img src="" alt="" id="jsi-zoom-img">
+		<p id="jsi-caption" class="zoom-caption"></p>
+		<a href="javascript:void(0);" class="jsc-close zoom-close">×</a>
+		<a href="javascript:void(0);" id="jsi-prev" class="zoom-arrow zoom-prev">＜</a>
+		<a href="javascript:void(0);" id="jsi-next" class="zoom-arrow zoom-next">＞</a>
+	</div>
+	<div id="jsi-overlay" class="overlay"></div>
+	</div>
+	
+	<script src="/jquery/jquery.js"></script>
+	<script>
+		var PRC = window.PRC || {};
+
+		PRC = {
+			lazyload : function ($container) {
+				var $img = $container.find('img');
+
+				$(window).on('load resize scroll', function () {
+					var windowHeight = $(window).height(),
+						windowOffset = $(window).scrollTop();
+					$img.each(function () {
+						var $this = $(this),
+							imgHeight = $img.parent().parent('li').height(),
+							imgOffset = $this.offset().top;
+
+						if ( windowOffset + windowHeight > imgOffset + imgHeight )  {
+							$this.attr('src', $this.attr('data-src'));
+							$this.animate({ opacity: 1 }, 500, 'linear');
+						}
+					});
+				});
+
+				this.zoom($container);
+			},
+			zoom : function ($container) {
+				var $trigger = $container.find('a'),
+					$zoomBox = $('#jsi-zoom-box'),
+					$zoomImg = $('#jsi-zoom-img'),
+					$zoomCaption = $('#jsi-caption'),
+					$overlay = $('#jsi-overlay'),
+					$close = $('.jsc-close'),
+					$prev = $('#jsi-prev'),
+					$next = $('#jsi-next'),
+					triggerLength = $trigger.length;
+
+
+				$trigger.on('click', function () {
+					var $this = $(this),
+						triggerSrc = $this.find('img').attr('src'),
+						caption = $this.find('img').attr('alt');
+						zoomSrc = triggerSrc.replace('.jpeg', '.large.jpg');
+
+					$this.addClass('current');
+
+					if ( $trigger.index($this) == 0 || $trigger.index($this) == 1 ) {
+						$prev.hide();
+					} else {
+						$prev.show();
+					}
+					if ( $trigger.index($this) == triggerLength || $trigger.index($this) == triggerLength - 1 ) {
+						$next.hide();
+					} else {
+						$next.show();
+					}
+
+					$overlay.show().animate({ opacity: .8 });
+					$zoomImg.attr('src', zoomSrc);
+					$zoomCaption.text(caption);
+					$zoomBox.fadeIn();
+					$('body').css('overflow', 'hidden');
+				});
+
+				var imgPrev = function () {
+					var $currentTrigger = $container.find('.current');
+
+					if ( $trigger.index($currentTrigger) == 0 || $trigger.index($currentTrigger) == 1 ) {
+						$prev.hide();
+					}
+					$next.show();
+
+					var $prevTrigger = $currentTrigger.parent('li').prev().find('a'),
+						prevImgSrc = $currentTrigger.parent('li').prev().find('img').attr('data-src'),
+						prevImgCaption = $currentTrigger.parent('li').prev().find('img').attr('alt'),
+						zoomSrc = prevImgSrc.replace('.jpeg', '.large.jpg');
+
+						$zoomImg.animate({ opacity: 0 }, {
+							complete: function () {
+								$(this).attr('src', zoomSrc);
+							}
+						}).animate({ opacity: 1 });
+						$zoomCaption.animate({ opacity: 0 }, {
+							complete: function () {
+								$(this).text(prevImgCaption);
+							}
+						}).animate({ opacity: 1 });
+						$currentTrigger.removeClass('current');
+						$prevTrigger.addClass('current');
+				};
+
+				var imgNext = function () {
+					var $currentTrigger = $container.find('.current');
+
+					if ( $trigger.index($currentTrigger) == triggerLength - 1 || $trigger.index($currentTrigger) == triggerLength - 2 ) {
+						$next.hide();
+					}
+					$prev.show();
+
+					var $nextTrigger = $currentTrigger.parent('li').next().find('a'),
+						nextImgSrc = $currentTrigger.parent('li').next().find('img').attr('data-src'),
+						nextImgCaption = $currentTrigger.parent('li').next().find('img').attr('alt'),
+						zoomSrc = nextImgSrc.replace('.jpeg', '.large.jpg');
+
+						$zoomImg.animate({ opacity: 0 }, {
+							complete: function () {
+								$(this).attr('src', zoomSrc);
+							}
+						}).animate({ opacity: 1 });
+						$zoomCaption.animate({ opacity: 0 }, {
+							complete: function () {
+								$(this).text(nextImgCaption);
+							}
+						}).animate({ opacity: 1 });
+						$currentTrigger.removeClass('current');
+						$nextTrigger.addClass('current');
+						
+				};
+
+				var zoomOut = function () {
+					$zoomBox.fadeOut();
+					$overlay.animate({ opacity: 0 }).css('display','none');
+					$('body').css('overflow', 'auto');
+					$trigger.removeClass('current');
+				};
+
+				var uzaiyo = function ($target) {
+					var $this = $target,
+						uzaposiTop = $this.position().top,
+						uzaposiLeft = $this.position().left;
+
+					$this.addClass('jsc-rotate');
+
+					if ( uzaposiTop < 330 && uzaposiLeft > 330 ) {
+						$this.animate({
+							'left' : - 10
+						}, {
+							complete: function () {
+								$this.removeClass('jsc-rotate');
+							}
+						});
+					} else if ( uzaposiTop < 330 && uzaposiLeft < 330 ) {
+						$this.animate({
+							'top' : 650
+						}, {
+							complete: function () {
+								$this.removeClass('jsc-rotate');
+							}
+						});
+					} else if ( uzaposiTop > 330 && uzaposiLeft < 330 ) {
+						$this.animate({
+							'left' : 630
+						}, {
+							complete: function () {
+								$this.removeClass('jsc-rotate');
+							}
+						});
+					} else if ( uzaposiTop > 330 && uzaposiLeft > 330 ) {
+						$this.animate({
+							'top' : - 20,
+							'left' : 2630
+						}, {
+							complete: function () {
+								$this.removeClass('jsc-rotate');
+								$this.addClass('jsc-rotate');
+								$this.animate({
+									'top' : - 10,
+									'left' : 630
+								}, {
+									duration: 4000,
+									easing: 'swing',
+									complete: function() {
+										$this.removeClass('jsc-rotate');
+									}
+								});
+							}
+						});
+					}
+				};
+
+				$prev.on('click', function () {
+					imgPrev();
+				});
+				$next.on('click', function () {
+					imgNext();
+				});
+				$close.on('click', function () {
+					zoomOut();
+				});
+				$overlay.on('click', function () {
+					zoomOut();
+				});
+
+				$close.on('mouseover', function () {
+					uzaiyo($(this));
+				});
+			}
+		}
+
+	$(function () {
+		PRC.lazyload($('.jsc-img-list'));
+	});
+	</script>
+</body>
+</html>

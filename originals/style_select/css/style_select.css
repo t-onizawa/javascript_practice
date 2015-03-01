@@ -1,0 +1,70 @@
+@charset "UTF-8";
+
+.style-select-wrap {
+	position: relative;
+	width: 400px;
+}
+.style-select-head {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	width: 100%;
+	padding: 11px 20px 9px 10px;
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
+	font-size: 14px;
+	line-height: 1;
+	font-weight: bold;
+	box-shadow: inset 0 0 5px rgba(0,0,0,.4);
+	-webkit-border-radius: 3px;
+	        border-radius: 3px;
+	color: #333;
+	cursor: pointer;
+	position: relative;
+}
+.style-select-head::after {
+	position: absolute;
+	display: block;
+	content: "";
+	width: 0;
+	height: 0;
+	border: solid transparent;
+	border-width: 8px 5px 8px 5px;
+	border-top-color: #666;
+	top: 50%;
+	right: 15px;
+	margin-top: -4px;
+}
+.style-select-head:hover {
+	background-color: #eee;
+}
+.style-select {
+	position: absolute;
+	top: 40px;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.6), 0 -1px 2px rgba(0,0,0,.1);
+	        box-shadow: 0 1px 2px rgba(0,0,0,.6), 0 -1px 2px rgba(0,0,0,.1);
+	border-radius: 5px;
+	display: none;
+}
+.style-select li:first-child,
+.style-select li:first-child a {
+	border-radius: 4px 4px 0 0;
+}
+.style-select li:last-child,
+.style-select li:last-child a {
+	border-radius: 0 0 4px 4px;
+}
+.style-option {
+	display: block;
+	padding: 6px 10px;
+	word-break: break-all;
+	word-wrap: break-word;
+	background-color: #fff;
+	font-size: 12px;
+	color: #666;
+	text-decoration: none;
+}
+.style-option:hover {
+	background-color: #efefef;
+}

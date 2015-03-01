@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function displayArguments ( age1, age2 ) {
+			var arg = Array.prototype.join.call(arguments);
+			return arg;
+		}
+
+		console.log(displayArguments(1,2));
+		console.log(displayArguments(1,2,3,4,5));
+	</script>
+</body>
+</html>

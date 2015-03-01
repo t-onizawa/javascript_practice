@@ -1,0 +1,90 @@
+@charset "utf-8";
+
+// # HTML5
+$use-html5: true;
+
+// # Support
+$support-ie6: false;
+$support-ie7: false;
+$support-ie8: false;
+$support-ie9: true;
+$support-mozilla: true;
+$support-webkit : true; // Chrome, Safari
+$support-opera  : true;
+
+// # Vendor-prefixed CSS Property
+$use-prefix-webkit: true;
+$use-prefix-moz   : true;
+$use-prefix-ms    : true;
+$use-prefix-o     : true;
+
+// # IE
+$use-ie-filter    : false;
+$use-ie-expression: false;
+
+// # Path
+$path_img: "/img/";
+$path_sprite_svg: "#{$path_img}/sprite/sprite.svg";
+$path_sprite_png: "#{$path_img}/sprite/sprite.png";
+
+// # DataURI
+$dataURI-btn: "data:image/png;base64,*****";
+
+// # OOCSS
+$use_oocss_set: true;
+
+// # Font Family
+$base_font: Arial, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", "Meiryo", verdana, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", Sans-Serif;
+
+// # Font Size
+$base_font_size: 12px;
+
+// $ Line Height
+$base_line_height: 1.6;
+
+// # Page Width
+$base_width: 1000px;
+
+// Text color
+$base_color: #333;
+
+// Sub color
+$sub_color: #666;
+
+// Main bgColor
+$base_bgColor: #fafafa;
+
+// Sub color
+$sub_bgColor: #fff;
+
+// Accent color
+$accent_color: #e73562;
+
+// Link color
+$link_color: #333;
+$link_color_visited: #333;
+$link_color_hover: #333;
+$link_color_active: #333;
+
+// Vender prefix
+$experimental-support-for-webkit: true;
+$experimental-support-for-mozilla: true;
+$experimental-support-for-microsoft: false;
+$experimental-support-for-opera: false;
+
+@mixin exp($property, $value,
+    $webkit     : $experimental-support-for-webkit,
+    $moz        : $experimental-support-for-mozilla,
+    $ms         : $experimental-support-for-microsoft,
+    $o          : $experimental-support-for-opera,
+    $official   : true
+) {
+    @if $webkit and $experimental-support-for-webkit    { -webkit-#{$property}: $value;}
+    @if $moz    and $experimental-support-for-mozilla   {    -moz-#{$property}: $value;}
+    @if $ms     and $experimental-support-for-microsoft {     -ms-#{$property}: $value;}
+    @if $o      and $experimental-support-for-opera     {      -o-#{$property}: $value;}
+    @if $official                                       {         #{$property}: $value;}
+}
+
+
+

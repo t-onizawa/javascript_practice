@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script>
+		var inspectSight = function(right, left, both){
+			var string;
+
+			if ( right >= 0.3 && left >= 0.3 && both >= 0.7) {
+				string = '合格';
+			} else {
+				string = '不合格';
+			}
+
+			return string;
+		};
+
+		var personA = inspectSight(1.0, 0.2, 0.7); console.log(personA); // 不合格と表示
+		var personB = inspectSight(0.6, 0.5, 0.6); console.log(personB); // 不合格と表示
+		var personC = inspectSight(0.4, 0.3, 0.8); console.log(personC); // 合格と表示
+	</script>
+</body>
+</html>

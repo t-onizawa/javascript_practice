@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	.target{
+margin: 30px; background-color: #AAFFAA; border: solid 1px #00FF00; text-align: center; line-height:100px;
+float: left;
+} .target1{
+width:100px;
+height:100px; }
+.target2{ width:100px; height:150px;
+} .target3{
+width:150px;
+height:100px; }
+.clearfix:after{ content: "."; display: block; height: 0;
+clear: both; visibility: hidden;
+}
+	</style>
+</head> 
+<body>
+	<div class="clearfix" id="container1">
+		<div class="target target1">1番目</div> <div class="target target2">2番目</div> <div class="target target3">3番目</div> <div class="target target1">4番目</div>
+	</div>
+	<div class="clearfix" id="container2">
+		<div class="target target1">5番目</div> <div class="target target2">6番目</div> <div class="target target3">7番目</div>
+	</div>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script>
+			var $target = $('.target');
+			
+			$target.each( function () {
+				var myself = $(this),
+					myWidth = myself.width(),
+					myHeight = myself.height();
+				
+				if ( myWidth == 100 && myHeight == 100 ) {
+					$(this).css({
+						'background-color' : '#00FFFF'
+					});
+				}	
+			});
+
+		
+		
+	</script>
+</body> 
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja" ng-app="ng">
+<head>
+	<meta charset="UTF-8">
+	<title>BRAIN=BRAIN</title>
+	<link href='//fonts.googleapis.com/css?family=Lilita+One|Gorditas' rel='stylesheet'>
+	<link rel="stylesheet" href="css/common.min.css">
+</head>
+<body>
+<div class="wrapper">
+	<header id="header" class="header">
+		<div class="header-inner">
+			<p class="header-logo"><a href="/">BRAIN=BRAIN</a></p>
+			<nav id="jsi-nav" class="header-nav display">
+				<ul>
+					<li><a href="javascript:void(0);">+</a></li>
+					<li><a href="javascript:void(0);">−</a></li>
+					<li><a href="javascript:void(0);">×</a></li>
+					<li><a href="javascript:void(0);">÷</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+	<section id="jsi-calculate" class="contents">
+		<h1 class="page-head">Please calculate</h1>
+		<p class="point-wrap">Your Point<span id="jsi-point" class="point">0</span></p>
+		<div id="jsi-sec-wrap" class="sec-wrap">
+			<section class="jsc-sec sec">
+				<h2 class="sec-head">Q. <span id="jsi-number">1</span></h2>
+				<div class="main">
+					<div class="num-oparator-wrap">
+						<span id="jsi-num-first" class="main-number"></span>
+						<span id="jsi-operator" class="main-operator"></span>
+						<span id="jsi-num-last" class="main-number"></span>
+						<span id="jsi-equal">=</span>
+						<input type="text" id="jsi-answer" class="main-number">
+					</div>
+				</div>
+			</section>
+		</div>
+		<div id="jsi-num-list" class="num-list over">
+			<ul class="cf">
+				<li><a href="javascript:void(0);">1</a></li>
+				<li><a href="javascript:void(0);">2</a></li>
+				<li><a href="javascript:void(0);">3</a></li>
+				<li><a href="javascript:void(0);">4</a></li>
+				<li><a href="javascript:void(0);">5</a></li>
+				<li><a href="javascript:void(0);">6</a></li>
+				<li><a href="javascript:void(0);">7</a></li>
+				<li><a href="javascript:void(0);">8</a></li>
+				<li><a href="javascript:void(0);">9</a></li>
+				<li><a href="javascript:void(0);">0</a></li>
+				<li><button id="jsi-delete" class="number-btn">CLEAR</button></li>
+				<li><button id="jsi-submit" class="number-btn">O.K.</button></li>
+			</ul>
+		</div>
+	</section>
+	<footer class="footer">
+		<small>Copyright &copy; 2013 BRAIN=BRAIN All Rights Reserved.</small>
+	</footer>
+	<div id="jsi-overlay" class="overlay"></div>
+</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/common.js"></script>
+</body>
+</html>

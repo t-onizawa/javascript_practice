@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#container {
+			position:absolute; 
+			visibility:hidden; 
+			width:300px;
+			height:200px;
+			border:solid 1px #808080; 
+			background-color:#E0E0E0; 
+			text-align:center;
+		}
+		#container span {
+			cursor:pointer; 
+			line-height:200px; 
+			font-size:20px;
+		}
+	</style>
+</head>
+<body>
+	<div id="container">
+		<span>閉じる</span> 
+	</div>
+	<input type="button" value="表示" id="display" />
+	<script>
+		var displayContainer = function () {
+				var target = document.getElementById('container');
+				var close = target.getElementsByTagName('span')[0];
+				var btn = document.getElementById('display');
+				
+			return {
+				init : function () {
+					this.visible();
+					this.hidden();
+					this.resize();
+				},
+				positioning : function () {
+					this.windowWidth = window.innerWidth;
+					this.windowHeight = window.innerHeight;
+					this.targetWidth = target.offsetWidth;
+					this.targetHeight = target.offsetHeight;
+					target.style.top = this.windowHeight / 2 - this.targetHeight / 2 + 'px';
+					target.style.left = this.windowWidth / 2 - this.targetWidth / 2 + 'px';
+					target.style.visibility = 'visible';
+				},
+				visible : function () {
+					var elem = this;
+					btn.onclick = function () {
+						elem.positioning();
+					}
+				},
+				hidden : function () {
+					var elem = this;
+					close.onclick = function () {
+						target.style.visibility = 'hidden';
+					}
+				},
+				resize : function () {
+					var elem = this;
+					window.onresize = function () {
+						elem.positioning();
+					}
+				}
+			}
+		};
+		var display = displayContainer();
+		display.init();
+
+	</script>
+</body>
+</html>

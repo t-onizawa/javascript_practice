@@ -1,0 +1,8 @@
+ul.container{ margin:0px; list-style: none; width: 100%; padding:0px;overflow: hidden;
+}
+ul.container li{
+margin: 10px 20px; float:left;
+border: solid 1px #808080; width: 200px;
+height: 200px; background-color: #88FFFF; opacity: 0;
+filter: alpha(opacity=0);
+}

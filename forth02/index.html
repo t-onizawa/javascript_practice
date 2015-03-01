@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<span class="sample">span width sample</span> 
+	<div class="target">div with target</div>
+	<span class="target">span width target1</span> 
+	<span >span without class</span>
+	<span class="target">span width target2</span>
+	<script>
+		var target =  document.getElementsByClassName('target');
+		
+		for ( i = 0; i < target.length; i++ ) {
+			if ( target[i].tagName == 'SPAN' ) {
+				console.log(target[i].innerHTML);
+			}
+		}
+	</script>
+</body>
+</html>

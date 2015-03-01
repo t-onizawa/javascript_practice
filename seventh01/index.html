@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script>
+		var answer;
+		function getFileNameFromUrl(url) {
+			if ( url.indexOf('http://') == -1 || url.indexOf('http://') == -1 ) {
+				answer = '形式が不正です';
+			} else {
+				var string = url.split('/');
+				for ( var i = 0; i < string.length; i ++ ) {
+					if ( string[i] == 'logo_lei.svg') {
+						answer = string[i].toUpperCase();
+						answer = answer.replace('.',':');
+					}
+				}
+			}
+			return answer;
+		}
+		alert(getFileNameFromUrl('http://www.leihauoli.com/img/logo_lei.svg')); // LOGO_LEI:SVGと表示
+	</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var object = {};
+
+		function count(data) {
+			
+			for ( var i = 0; i < data.length; i++ ) {
+	
+				if ( object[data[i]] ) {
+					object[data[i]]++;
+				} else {
+					object[data[i]] = 1;
+				}
+			}
+
+			var text = '';
+			for ( var i in object ) {
+				text += ( i + ' = ' + object[i] + ' ' );
+			}
+			
+			return text;
+		}
+		
+
+		var result = count( ['orange', 'apple', 'lemon', 'apple', 'apple', 'orange']);
+		console.log(result); // orange = 2 lemon = 1 apple = 3と表示
+
+	</script>
+</body>
+</html>

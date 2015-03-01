@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<p id="jsi-p">選んで下さい</p>
+	<a href="#" id="btn">Copy</a>
+	<p id="jsi-tooltip" style="display: none;">コピーしました。</p>
+	<script src="/jquery/jquery.js"></script>
+	<script src="js/zClip.js"></script>
+	<script>
+	// $(function () {
+	// 	$('#btn').zclip({
+	// 	    path: "http://www.steamdev.com/zclip/js/ZeroClipboard.swf",
+	// 	    copy: function(){
+	// 	      return $(this).prev().text();
+	// 	    },
+	// 	    afterCopy: function () {
+	// 	    	$('#jsi-tooltip').fadeIn().fadeOut();
+		    	
+	// 	    }
+
+	// 	  });
+	// });
+
+	$(function () {
+		$('#jsi-p').on('click', function () {
+			$(this).focus();
+		});
+	})
+		
+	</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="34" height="55" viewBox="0, 0, 34, 55">
+  <g id="Layer 1">
+    <g>
+      <image xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAA0CAYAAADrPTp5AAABlUlEQVRYCe2Y20rDQBRFTb1fUBFFEB8FH/T/f0lEsYJ4wUvrWkNSkjTFQJvx5WxYZjKdzj6zk/pwirVujZiWoqR7Vb/ZKctkUtL4lgZ1aboJ6/ANn7Cs9HDPDbAI9/Q6J00PYGvuk9VNWIgeeiVVA0++D1a3ilOnzTv+eHK9dsCEp94oT211Q5rroz5Av5S0Bcgu5DDHJski9BzVC3Ayl94wmhXgW2ocPpNc8mepZ2ECFuA1t/wBpAI0bv8/yFbMf5y8cbgoIBKIBCKBSCASiAQigUggEogEIoFIIBKIBCKBegL1caOJMMCNLUH7RKk35OAHjpzIpEN8bFqmRqUF2CO8gFw6w0jPVICVvMM2nMDQOsZgD/Sc2CpLz4Kr78AVvMBQTctT9r6Be3iGr6pZbQq+BxZxDS6sHo3zy0iPc7iFS7iDBzCBab0/6EI75j4GC6iiss/vuvpabnvJQ9iBfYUxPMIT2KpNB2tvagK2UO3jimPn2uuY6i2NfOE8sTg28aRFG2taGS9aU27x58UURNOZcfWtX8uMRY1puWUBAAAAAElFTkSuQmCC" preserveAspectRatio="none" x="1" y="2.5" width="32" height="52"/>
+      <path d="M9,3.5 C9,3.5 25,3.5 25,3.5 C28.314,3.5 31,6.186 31,9.5 C31,9.5 31,45.5 31,45.5 C31,48.814 28.314,51.5 25,51.5 C25,51.5 9,51.5 9,51.5 C5.686,51.5 3,48.814 3,45.5 C3,45.5 3,9.5 3,9.5 C3,6.186 5.686,3.5 9,3.5 z" fill="#ECF1F5"/>
+    </g>
+    <path d="M5,11.5 C5,11.5 29,11.5 29,11.5 C29,11.5 29,43.5 29,43.5 C29,43.5 5,43.5 5,43.5 C5,43.5 5,11.5 5,11.5 z" fill="#262A2D"/>
+    <path d="M17,45.5 C18.105,45.5 19,46.395 19,47.5 C19,48.605 18.105,49.5 17,49.5 C15.895,49.5 15,48.605 15,47.5 C15,46.395 15.895,45.5 17,45.5 z" fill="#B6C1CA"/>
+    <path d="M15,6.5 C15,6.5 19,6.5 19,6.5 C19.552,6.5 20,6.948 20,7.5 C20,8.052 19.552,8.5 19,8.5 C19,8.5 15,8.5 15,8.5 C14.448,8.5 14,8.052 14,7.5 C14,6.948 14.448,6.5 15,6.5 z" fill="#BCC8D2"/>
+  </g>
+  <defs/>
+</svg>

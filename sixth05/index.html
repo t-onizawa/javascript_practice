@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="button" value="開始" id="start">
+	<input type="button" value="停止" id="stop">
+	<script>
+	var Measure = function () {
+		this.start = function () {
+			var date = new Date;
+			var time = date.getTime();
+			this.startTime = time;
+		},
+		this.stop = function () {
+			var date = new Date;
+			var time = date.getTime();
+			this.stopTime = time;
+			console.log(this.stopTime - this.startTime);
+		}
+	}
+
+	var Report = function () {};
+	Report.prototype = new Measure();
+	Report.prototype.startMonitoring = function () {
+		var count = 1;
+		timerId = setInterval( function () {
+			console.log( count + '秒経過')
+			count++;
+		}, 1000);
+	};
+	Report.prototype.stopMonitoring = function () {
+		clearInterval(timerId);
+	};
+
+	var report = new Report();
+	document.getElementById('start').onclick = function () {
+		report.start();
+		report.startMonitoring();
+	};
+	document.getElementById('stop').onclick = function () {
+		report.stopMonitoring();
+		report.stop();
+	};
+	</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<table id="target"> 
+		<thead>
+			<tr>
+				<th>社員ID</th>
+				<th>社員名</th>
+			</tr> 
+		</thead>
+		<tbody>
+			<tr><td>0000001</td><td>s.takeuchi</td></tr>
+			<tr><td>0000002</td><td>a.yamaguchi</td></tr>
+			<tr><td>0000003</td><td>dummy</td></tr>
+			<tr><td>0000004</td><td>dummy</td></tr>
+			<tr><td>0000005</td><td>t.igari</td></tr>
+		</tbody>
+	</table>
+	<script>
+		var table = document.getElementById('target');
+		var tbody = table.getElementsByTagName('tbody')[0];
+		var tr1 = table.getElementsByTagName('tr')[3];
+		var tr2 = table.getElementsByTagName('tr')[4];
+		
+		tbody.removeChild(tr1);
+		tbody.removeChild(tr2);
+	</script>
+</body>
+</html>

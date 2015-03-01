@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	
+	setInterval( function () {
+		var date = new Date();
+		var hour = date.getHours();
+		var minute = date.getMinutes();
+		var seconds = date.getSeconds();
+
+		console.log( hour + ':' + minute + ':' + seconds );
+	}, 1000);
+	
+	</script>
+</body>
+</html>

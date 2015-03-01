@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+	<title>Pagelist</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		body {
+			background-color: #EFEFEF;
+			font-size: 14px;
+		}
+		a {
+			color: #666;
+		}
+		a:hover {
+			color: #4E7CBF;
+		}
+		.wrapper {
+			padding: 100px 0;
+		}
+		.contents {
+			background-color: #FFF;
+			width: 960px;
+			margin: 0 auto;
+			-webkit-box-shadow: 0 0 3px rgba(0,0,0, .3);
+			        box-shadow: 0 0 3px rgba(0,0,0, .3);
+			-webkit-border-radius: 3px;
+			        border-radius: 3px;
+		}
+		.header {
+			-webkit-box-shadow: 0 0 3px rgba(0,0,0, .3);
+			box-shadow: 0 0 3px rgba(0,0,0, .3);
+		    background-color: #4E7CBF;
+		    position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			text-align: center;
+		}
+		.nav-list {
+			margin: 0 auto;
+			width: 960px;
+			display: -webkit-box;
+			display: -moz-box;
+			display: box;
+			-webkit-box-pack: center;
+			-moz-box-pack: center;
+			box-pack: center;
+			border-right: 1px solid #ABBEDF;
+			-webkit-box-sizing: border-box;
+			   -moz-box-sizing: border-box;
+			        box-sizing: border-box;
+		}
+		.nav-list li {
+			-webkit-box-flex: 1;
+			-moz-box-flex: 1;
+			box-flex: 1;
+		    -webkit-box-sizing: border-box;
+		       -moz-box-sizing: border-box;
+		            box-sizing: border-box;
+			list-style: none;
+			border-left: 1px solid #ABBEDF;
+			word-break: break-all;
+			word-wrap: break-word;
+		}
+		.nav-list a {
+			display: block;
+			padding: 10px;
+			text-align: center;
+			text-decoration: none;
+			color: #FFF;
+			background-color: #4E7CBF;
+			transition: background-color .15s ease-in-out 0;
+		}
+		.nav-list a:hover {
+			color: #000;
+			background-color: #EFEFEF;
+		}
+		.tbl-sec {
+			margin: 0 60px;
+			padding: 30px 0;
+		}
+		.headline {
+			font-size: 18px;
+			font-weight: bold;
+			color: #333;
+			border-bottom: 1px solid #4E7CBF;
+		}
+		.tbl {
+			color: #666;
+			width: 100%;
+			table-layout: fixed;
+		}
+		.tbl th, .tbl td {
+			width: 50%;
+			text-align: left;
+		}
+		.tbl th {
+			padding: 10px 0;
+		}
+		.tbl td {
+			padding: 5px 0;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+		.pagetop-wrap {
+			position: fixed;
+			right: 50px;
+			bottom: 50px;
+		}
+		.pagetop {
+			padding: 10px;
+			text-decoration: none;
+			color: #FFF;
+			background-color: #4E7CBF;
+			transition: background-color .15s ease-in-out 0;
+			-webkit-box-shadow: 0 0 3px rgba(0,0,0, .3);
+			        box-shadow: 0 0 3px rgba(0,0,0, .3);
+			-webkit-border-radius: 3px;
+			        border-radius: 3px;
+		}
+		.pagetop:hover {
+			color: #000;
+			background-color: #EFEFEF;
+		}
+		@media only screen and (max-width: 960px) {
+			.nav-list, .contents {
+				width: 100%;
+			}
+			.tbl-sec {
+				margin: 0 10px;
+			}
+		}
+		@media only screen and (max-width: 480px) {
+			.wrapper {
+				padding-top: 56px;
+			}
+			.nav {
+				position: relative;
+			}
+			.nav-list {
+				display: block;
+				position: absolute;
+				top: 51px;
+			}
+			.nav-list.transition {
+				-webkit-transition: all 300ms ease;
+			 	   -moz-transition: all 300ms ease;
+			 	        transition: all 300ms ease;
+			}
+			.nav-list li {
+				border-bottom: 1px solid #ABBEDF;
+			}
+			.sp-btn-nav,
+			.sp-btn-nav:hover {
+				display: block;
+				height: 50px;
+				line-height: 46px;
+				color: #4E7CBF;
+				font-size: 16px;
+				background-color: #fafafa;
+				border: 3px solid #4E7CBF;
+				text-decoration: none;
+				-webkit-box-sizing: border-box;
+				   -moz-box-sizing: border-box;
+				        box-sizing: border-box;
+			}
+			.pagetop-wrap {
+				right: 5px;
+				bottom: 10px;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="wrapper" id="top">
+		<header class="header">
+			<nav id="jsi-nav" class="nav">
+				<ul class="nav-list">
+					<li><a href="#sec01">超初級編</a></li>
+					<li><a href="#sec02">初級編1</a></li>
+					<li><a href="#sec03">初級編2</a></li>
+					<li><a href="#sec04">初級編3</a></li>
+					<li><a href="#sec05">初級編4</a></li>
+					<li><a href="#sec06">中級編1</a></li>
+					<li><a href="#sec07">中級編2</a></li>
+					<li><a href="#sec08">中級編3</a></li>
+					<li><a href="#sec09">中級編4</a></li>
+					<li><a href="#sec10">jQuery 2</a></li>
+					<li><a href="#sec11">Originals</a></li>
+				</ul>
+			</nav>
+		</header>
+		<div class="contents">
+			<div id="sec01" class="tbl-sec">
+				<h2 class="headline">超初級編</h2>
+				<table class="tbl">
+					<thead>
+						<tr>
+							<th>Question</th>
+							<th>PageURL</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><a href="/first01/">演習3</a></td>
+							<td><a href="/first01/">/first01/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/first02/">演習4</a></td>
+							<td><a href="/first02/">/first02/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/first03/">演習5</a></td>
+							<td><a href="/first03/">/first03/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/first04/">演習6</a></td>
+							<td><a href="/first04/">/first04/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/first05/">演習7 問1</a></td>
+							<td><a href="/first05/">/first05/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/first06/">演習7 問2</a></td>
+							<td><a href="/first06/">/first06/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/first07/">演習8</a></td>
+							<td><a href="/first07/">/first07/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/first08/">演習9</a></td>
+							<td><a href="/first08/">/first08/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/first09/">演習11</a></td>
+							<td><a href="/first09/">/first09/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/first10/">演習12</a></td>
+							<td><a href="/first10/">/first10/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/first11/">演習13</a></td>
+							<td><a href="/first11/">/first11/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/first12/">演習14</a></td>
+							<td><a href="/first12/">/first12/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/first13/">最終課題</a></td>
+							<td><a href="/first13/">/first13/</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div id="sec02" class="tbl-sec">
+				<h2 class="headline">初級編 1</h2>
+				<table class="tbl">
+					<thead>
+						<tr>
+							<th>Question</th>
+							<th>PageURL</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><a href="/second01/">関数</a></td>
+							<td><a href="/second01/">/second01/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/second02/">ローカル変数とグローバル変数 </a></td>
+							<td><a href="/second02/">/second02/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/second03/">配列 - 問題1</a></td>
+							<td><a href="/second03/">/second03/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/second04/">配列 - 問題2</a></td>
+							<td><a href="/second04/">/second04/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/second05/">連想配列 - 問題1</a></td>
+							<td><a href="/second05/">/second05/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/second06/">連想配列 - 問題2</a></td>
+							<td><a href="/second06/">/second06/</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div id="sec03" class="tbl-sec">
+				<h2 class="headline">初級編 2</h2>
+				<table class="tbl">
+					<thead>
+						<tr>
+							<th>Question</th>
+							<th>PageURL</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><a href="/third01/">オブジェクト 問題</a></td>
+							<td><a href="/third01/">/third01/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/third02/">予約後this 問題1</a></td>
+							<td><a href="/third02/">/third02/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/third03/">予約後this 問題2</a></td>
+							<td><a href="/third03/">/third03/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/third04/">json 問題1</a></td>
+							<td><a href="/third04/">/third04/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/third05/">json 問題2</a></td>
+							<td><a href="/third05/">/third05/</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div id="sec04" class="tbl-sec">
+				<h2 class="headline">初級編 3</h2>
+				<table class="tbl">
+					<thead>
+						<tr>
+							<th>Question</th>
+							<th>PageURL</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><a href="/forth01/">DOMオブジェクトの取得 問題1</a></td>
+							<td><a href="/forth01/">/forth01/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/forth02/">DOMオブジェクトの取得 問題2</a></td>
+							<td><a href="/forth02/">/forth02/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/forth03/">DOMオブジェクトの取得 問題3</a></td>
+							<td><a href="/forth03/">/forth03/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/forth04/">DOMオブジェクトの作成 問題1</a></td>
+							<td><a href="/forth04/">/forth04/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/forth05/">DOMオブジェクトの作成 問題2</a></td>
+							<td><a href="/forth05/">/forth05/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/forth06/">DOMオブジェクトの削除</a></td>
+							<td><a href="/forth06/">/forth06/</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div id="sec05" class="tbl-sec">
+				<h2 class="headline">初級編 4</h2>
+				<table class="tbl">
+					<thead>
+						<tr>
+							<th>Question</th>
+							<th>PageURL</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><a href="/fifth01/">実行タイミング 問題</a></td>
+							<td><a href="/fifth01/">/fifth01/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/fifth02/">イベントハンドラ 問題1</a></td>
+							<td><a href="/fifth02/">/fifth02/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/fifth03/">イベントハンドラ 問題2</a></td>
+							<td><a href="/fifth03/">/fifth03/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/fifth04/">最終課題</a></td>
+							<td><a href="/fifth04/">/fifth04/</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div id="sec06" class="tbl-sec">
+				<h2 class="headline">中級編 1</h2>
+				<table class="tbl">
+					<thead>
+						<tr>
+							<th>Question</th>
+							<th>PageURL</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><a href="/sixth01/">コンストラクタ 問題1</a></td>
+							<td><a href="/sixth01/">/sixth01/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/sixth02/">コンストラクタ 問題2</a></td>
+							<td><a href="/sixth02/">/sixth02/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/sixth03/">prototype 問題1</a></td>
+							<td><a href="/sixth03/">/sixth03/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/sixth04/">継承 問題1</a></td>
+							<td><a href="/sixth04/">/sixth04/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/sixth05/">継承 問題2</a></td>
+							<td><a href="/sixth05/">/sixth05/</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div id="sec07" class="tbl-sec">
+				<h2 class="headline">中級編 2</h2>
+				<table class="tbl">
+					<thead>
+						<tr>
+							<th>Question</th>
+							<th>PageURL</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><a href="/seventh01/">コンストラクタ 問題1</a></td>
+							<td><a href="/seventh01/">/seventh01/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/seventh02/">コンストラクタ 問題2</a></td>
+							<td><a href="/seventh02/">/seventh02/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/seventh03/">callとapply 問題1</a></td>
+							<td><a href="/seventh03/">/seventh03/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/seventh04/">callとapply 問題2</a></td>
+							<td><a href="/seventh04/">/seventh04/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/seventh05/">正規表現 問題1</a></td>
+							<td><a href="/seventh05/">/seventh05/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/seventh06/">正規表現 問題1 2個目</a></td>
+							<td><a href="/seventh06/">/seventh06/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/seventh07/">正規表現 問題2</a></td>
+							<td><a href="/seventh07/">/seventh07/</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div id="sec08" class="tbl-sec">
+				<h2 class="headline">中級編 3</h2>
+				<table class="tbl">
+					<thead>
+						<tr>
+							<th>Question</th>
+							<th>PageURL</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><a href="/eighth01/">クロージャ 問題</a></td>
+							<td><a href="/eighth01/">/eighth01/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/eighth02/">機能の拡張 問題</a></td>
+							<td><a href="/eighth02/">/eighth02/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/eighth03/">DOMの配置 問題1</a></td>
+							<td><a href="/eighth03/">/eighth03/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/eighth04/">DOMの配置 問題2</a></td>
+							<td><a href="/eighth04/">/eighth04/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/eighth05/">AjaxとJSONP 問題</a></td>
+							<td><a href="/eighth05/">/eighth05/</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div id="sec09" class="tbl-sec">
+				<h2 class="headline">中級編 4</h2>
+				<table class="tbl">
+					<thead>
+						<tr>
+							<th>Question</th>
+							<th>PageURL</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><a href="/ninth01/">最終課題 1</a></td>
+							<td><a href="/ninth01/">/ninth01/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/ninth02/">最終課題 2</a></td>
+							<td><a href="/ninth02/">/ninth02/</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div id="sec10" class="tbl-sec">
+				<h2 class="headline">jQuery 2</h2>
+				<table class="tbl">
+					<thead>
+						<tr>
+							<th>Question</th>
+							<th>PageURL</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><a href="/jquery_tab/">TAB</a></td>
+							<td><a href="/jquery_tab/">/jquery_tab/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/jquery_lazyload/">LAZYLOAD</a></td>
+							<td><a href="/jquery_lazyload/">/jquery_lazyload/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/jquery_mouse_animation/">MOUSE ANIMATION</a></td>
+							<td><a href="/jquery_mouse_animation/">/jquery_mouse_animation/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/jquery_my_animation/">MY ANIMATION</a></td>
+							<td><a href="/jquery_my_animation/">/jquery_my_animation/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/jquery_mogura/">MOGURA</a></td>
+							<td><a href="/jquery_mogura/">/jquery_mogura/</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div id="sec11" class="tbl-sec">
+				<h2 class="headline">Originals</h2>
+				<table class="tbl">
+					<thead>
+						<tr>
+							<th>Question</th>
+							<th>PageURL</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><a href="/originals/style_select/index.php">STYLE SELECT</a></td>
+							<td><a href="/originals/style_select/index.php">/originals/style_select/index.php</a></td>
+						</tr>
+						<tr>
+							<td><a href="/originals/touchSwipe/">TOUCH SWIPE</a></td>
+							<td><a href="/originals/touchSwipe/">/originals/touchSwipe/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/originals/touchSwipe/test.html">TOUCH SWIPE TEST</a></td>
+							<td><a href="/originals/touchSwipe/test.html">/originals/touchSwipe/test.html</a></td>
+						</tr>
+						<tr>
+							<td><a href="/originals/sidebar/">SIDEBAR</a></td>
+							<td><a href="/originals/sidebar/">/originals/sidebar/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/originals/bar_select_swipe/">bar_select_swipe</a></td>
+							<td><a href="/originals/bar_select_swipe/">/originals/bar_select_swipe/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/originals/rwd_carousel/">rwd_carousel</a></td>
+							<td><a href="/originals/rwd_carousel/">/originals/rwd_carousel/</a></td>
+						</tr>
+						<tr>
+							<td><a href="/originals/brain/">brain</a></td>
+							<td><a href="/originals/brain/">/originals/brain/</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<p class="pagetop-wrap"><a href="#top" class="jsc-pagetop pagetop">to Top</a></p>
+<script src="/jquery/jquery.js"></script>
+<script>
+/*
+ * jQuery Easing v1.3 - http://gsgd.co.uk/sandbox/jquery/easing/
+ *
+ * Uses the built in easing capabilities added In jQuery 1.1
+ * to offer multiple easing options
+ *
+ * TERMS OF USE - jQuery Easing
+ * 
+ * Open source under the BSD License. 
+ * 
+ * Copyright © 2008 George McGinley Smith
+ * All rights reserved.
+ * 
+ * Redistribution and use in source and binary forms, with or without modification, 
+ * are permitted provided that the following conditions are met:
+ * 
+ * Redistributions of source code must retain the above copyright notice, this list of 
+ * conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above copyright notice, this list 
+ * of conditions and the following disclaimer in the documentation and/or other materials 
+ * provided with the distribution.
+ * 
+ * Neither the name of the author nor the names of contributors may be used to endorse 
+ * or promote products derived from this software without specific prior written permission.
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY 
+ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+ *  COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ *  EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+ *  GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED 
+ * AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+ * OF THE POSSIBILITY OF SUCH DAMAGE. 
+ *
+*/
+
+// t: current time, b: begInnIng value, c: change In value, d: duration
+jQuery.easing['jswing'] = jQuery.easing['swing'];
+
+jQuery.extend( jQuery.easing,
+{
+	def: 'easeOutQuad',
+	swing: function (x, t, b, c, d) {
+		//alert(jQuery.easing.default);
+		return jQuery.easing[jQuery.easing.def](x, t, b, c, d);
+	},
+	easeInQuad: function (x, t, b, c, d) {
+		return c*(t/=d)*t + b;
+	},
+	easeOutQuad: function (x, t, b, c, d) {
+		return -c *(t/=d)*(t-2) + b;
+	},
+	easeInOutQuad: function (x, t, b, c, d) {
+		if ((t/=d/2) < 1) return c/2*t*t + b;
+		return -c/2 * ((--t)*(t-2) - 1) + b;
+	},
+	easeInCubic: function (x, t, b, c, d) {
+		return c*(t/=d)*t*t + b;
+	},
+	easeOutCubic: function (x, t, b, c, d) {
+		return c*((t=t/d-1)*t*t + 1) + b;
+	},
+	easeInOutCubic: function (x, t, b, c, d) {
+		if ((t/=d/2) < 1) return c/2*t*t*t + b;
+		return c/2*((t-=2)*t*t + 2) + b;
+	},
+	easeInQuart: function (x, t, b, c, d) {
+		return c*(t/=d)*t*t*t + b;
+	},
+	easeOutQuart: function (x, t, b, c, d) {
+		return -c * ((t=t/d-1)*t*t*t - 1) + b;
+	},
+	easeInOutQuart: function (x, t, b, c, d) {
+		if ((t/=d/2) < 1) return c/2*t*t*t*t + b;
+		return -c/2 * ((t-=2)*t*t*t - 2) + b;
+	},
+	easeInQuint: function (x, t, b, c, d) {
+		return c*(t/=d)*t*t*t*t + b;
+	},
+	easeOutQuint: function (x, t, b, c, d) {
+		return c*((t=t/d-1)*t*t*t*t + 1) + b;
+	},
+	easeInOutQuint: function (x, t, b, c, d) {
+		if ((t/=d/2) < 1) return c/2*t*t*t*t*t + b;
+		return c/2*((t-=2)*t*t*t*t + 2) + b;
+	},
+	easeInSine: function (x, t, b, c, d) {
+		return -c * Math.cos(t/d * (Math.PI/2)) + c + b;
+	},
+	easeOutSine: function (x, t, b, c, d) {
+		return c * Math.sin(t/d * (Math.PI/2)) + b;
+	},
+	easeInOutSine: function (x, t, b, c, d) {
+		return -c/2 * (Math.cos(Math.PI*t/d) - 1) + b;
+	},
+	easeInExpo: function (x, t, b, c, d) {
+		return (t==0) ? b : c * Math.pow(2, 10 * (t/d - 1)) + b;
+	},
+	easeOutExpo: function (x, t, b, c, d) {
+		return (t==d) ? b+c : c * (-Math.pow(2, -10 * t/d) + 1) + b;
+	},
+	easeInOutExpo: function (x, t, b, c, d) {
+		if (t==0) return b;
+		if (t==d) return b+c;
+		if ((t/=d/2) < 1) return c/2 * Math.pow(2, 10 * (t - 1)) + b;
+		return c/2 * (-Math.pow(2, -10 * --t) + 2) + b;
+	},
+	easeInCirc: function (x, t, b, c, d) {
+		return -c * (Math.sqrt(1 - (t/=d)*t) - 1) + b;
+	},
+	easeOutCirc: function (x, t, b, c, d) {
+		return c * Math.sqrt(1 - (t=t/d-1)*t) + b;
+	},
+	easeInOutCirc: function (x, t, b, c, d) {
+		if ((t/=d/2) < 1) return -c/2 * (Math.sqrt(1 - t*t) - 1) + b;
+		return c/2 * (Math.sqrt(1 - (t-=2)*t) + 1) + b;
+	},
+	easeInElastic: function (x, t, b, c, d) {
+		var s=1.70158;var p=0;var a=c;
+		if (t==0) return b;  if ((t/=d)==1) return b+c;  if (!p) p=d*.3;
+		if (a < Math.abs(c)) { a=c; var s=p/4; }
+		else var s = p/(2*Math.PI) * Math.asin (c/a);
+		return -(a*Math.pow(2,10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )) + b;
+	},
+	easeOutElastic: function (x, t, b, c, d) {
+		var s=1.70158;var p=0;var a=c;
+		if (t==0) return b;  if ((t/=d)==1) return b+c;  if (!p) p=d*.3;
+		if (a < Math.abs(c)) { a=c; var s=p/4; }
+		else var s = p/(2*Math.PI) * Math.asin (c/a);
+		return a*Math.pow(2,-10*t) * Math.sin( (t*d-s)*(2*Math.PI)/p ) + c + b;
+	},
+	easeInOutElastic: function (x, t, b, c, d) {
+		var s=1.70158;var p=0;var a=c;
+		if (t==0) return b;  if ((t/=d/2)==2) return b+c;  if (!p) p=d*(.3*1.5);
+		if (a < Math.abs(c)) { a=c; var s=p/4; }
+		else var s = p/(2*Math.PI) * Math.asin (c/a);
+		if (t < 1) return -.5*(a*Math.pow(2,10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )) + b;
+		return a*Math.pow(2,-10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )*.5 + c + b;
+	},
+	easeInBack: function (x, t, b, c, d, s) {
+		if (s == undefined) s = 1.70158;
+		return c*(t/=d)*t*((s+1)*t - s) + b;
+	},
+	easeOutBack: function (x, t, b, c, d, s) {
+		if (s == undefined) s = 1.70158;
+		return c*((t=t/d-1)*t*((s+1)*t + s) + 1) + b;
+	},
+	easeInOutBack: function (x, t, b, c, d, s) {
+		if (s == undefined) s = 1.70158; 
+		if ((t/=d/2) < 1) return c/2*(t*t*(((s*=(1.525))+1)*t - s)) + b;
+		return c/2*((t-=2)*t*(((s*=(1.525))+1)*t + s) + 2) + b;
+	},
+	easeInBounce: function (x, t, b, c, d) {
+		return c - jQuery.easing.easeOutBounce (x, d-t, 0, c, d) + b;
+	},
+	easeOutBounce: function (x, t, b, c, d) {
+		if ((t/=d) < (1/2.75)) {
+			return c*(7.5625*t*t) + b;
+		} else if (t < (2/2.75)) {
+			return c*(7.5625*(t-=(1.5/2.75))*t + .75) + b;
+		} else if (t < (2.5/2.75)) {
+			return c*(7.5625*(t-=(2.25/2.75))*t + .9375) + b;
+		} else {
+			return c*(7.5625*(t-=(2.625/2.75))*t + .984375) + b;
+		}
+	},
+	easeInOutBounce: function (x, t, b, c, d) {
+		if (t < d/2) return jQuery.easing.easeInBounce (x, t*2, 0, c, d) * .5 + b;
+		return jQuery.easing.easeOutBounce (x, t*2-d, 0, c, d) * .5 + c*.5 + b;
+	}
+});
+
+/*
+ *
+ * TERMS OF USE - EASING EQUATIONS
+ * 
+ * Open source under the BSD License. 
+ * 
+ * Copyright © 2001 Robert Penner
+ * All rights reserved.
+ * 
+ * Redistribution and use in source and binary forms, with or without modification, 
+ * are permitted provided that the following conditions are met:
+ * 
+ * Redistributions of source code must retain the above copyright notice, this list of 
+ * conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above copyright notice, this list 
+ * of conditions and the following disclaimer in the documentation and/or other materials 
+ * provided with the distribution.
+ * 
+ * Neither the name of the author nor the names of contributors may be used to endorse 
+ * or promote products derived from this software without specific prior written permission.
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY 
+ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+ *  COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ *  EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+ *  GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED 
+ * AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+ * OF THE POSSIBILITY OF SUCH DAMAGE. 
+ *
+ */
+</script>
+<script>
+	var scroll = function (trigger, event) {
+		var self = trigger,
+			link = self.hash;
+			target = $(link).offset().top;
+
+			event.preventDefault();
+			$('html,body').animate({
+				scrollTop: target - 30
+			}, 600, 'easeOutExpo' );
+		
+	};	
+
+	var navPositionChange = function () {
+		var $navContainer = $('#jsi-nav'),
+			$navList = $navContainer.find('.nav-list'),
+			$navBtn = $('<a href="javascript:void()0;" class="sp-btn-nav">MENU</a>'),
+			$win = $(window),
+			winWidth = $win.width();
+
+			$win.on('load resize', function () {
+				if ( $navList.css('display') == 'block' ) {
+					$navContainer.append($navBtn);
+					winWidth = $win.width();
+					$navList.removeClass('open transition').css({
+						WebkitTransform : 'translateX(' + winWidth + 'px)',
+						MozTransform : 'translateX(' + winWidth + 'px)',
+						Transform : 'translateX(' + winWidth + 'px)'
+					});
+					setTimeout(function () {
+						$navList.addClass('transition');
+					}, 300);
+				} else {
+					$navBtn.remove();
+					$navList.removeClass('open transition').css({
+						WebkitTransform : 'translateX(0px)',
+						MozTransform : 'translateX(0px)',
+						Transform : 'translateX(0px)'
+					});
+				}
+			});
+
+			$navBtn.on('click', function () {
+				if ( $navList.hasClass('open') ) {
+					$navList.removeClass('open').css({
+						WebkitTransform : 'translateX(' + winWidth + 'px)',
+						MozTransform : 'translateX(' + winWidth + 'px)',
+						Transform : 'translateX(' + winWidth + 'px)'
+					});
+					$(this).text('MENU');
+				} else {
+					$navList.addClass('open transition').css({
+						WebkitTransform : 'translateX(0)',
+						MozTransform : 'translateX(0)',
+						Transform : 'translateX(0)'
+					});
+					$(this).text('Close⇒');
+				}
+			});
+
+			$('#jsi-nav a').on('click', function () {
+				if ( $navList.css('display') == 'block' ) {
+					$navList.removeClass('open').css({
+						WebkitTransform : 'translateX(' + winWidth + 'px)',
+						MozTransform : 'translateX(' + winWidth + 'px)',
+						Transform : 'translateX(' + winWidth + 'px)'
+					});
+					$navBtn.text('MENU');
+				}
+			});
+			
+	};
+	$(function () {
+		$('#jsi-nav a').on('click', function (event) {
+			scroll(this, event);
+		});
+		$('.jsc-pagetop').on('click', function (event) {
+			scroll(this, event);
+		});
+		navPositionChange();
+	});
+</script>
+</body>
+</html>

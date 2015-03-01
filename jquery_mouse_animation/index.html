@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		.wrapper {
+			background-color: #000;
+		}
+		.circle {
+			width: 2px;
+			height: 2px;
+			-webkit-border-radius: 40px;
+			border-radius: 40px;
+			position: absolute;
+			background-color: #000;
+			opacity: 1;
+			/*-webkit-transition: -webkit-transform 1s linear, opacity 1.4s linear;
+			-moz-transition: -moz-transform 1s linear, opacity 1.4s linear;
+			transition: transform 1s linear, opacity 1.4s linear;*/
+		}
+		.circle.animation {
+			/*opacity: .5;
+			-webkit-transform: scale(40);
+			-moz-transform: scale(40);
+			transform: scale(40);*/
+			-webkit-border-radius: 40px;
+			border-radius: 40px;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrapper" id="jsi-wrapper"></div>
+	<script src="/jquery/jquery.js"></script>
+	<script>
+		var PRC = window.PRC || {};
+
+		PRC.mouseAnimation = {
+			init : function ($container) {
+				this.container = $container;
+				this.animeStartTime = 100;
+
+				this.sizing();
+			},
+			sizing : function () {
+				var windowW = $(window).width(),
+					windowH = $(window).height();
+				this.container.width(windowW);
+				this.container.height(windowH);
+
+				this.position();
+			},
+			position : function () {
+				var element = this,
+					mouseLeft,
+					mouseTop;
+					
+				this.container.on('mousemove', function () {
+					mouseLeft = $(window).scrollLeft() + event.clientX;
+					mouseTop = $(window).scrollTop() + event.clientY;
+
+					element.createDiv(mouseLeft, mouseTop);
+				});
+			},
+			createDiv : function ( mouseLeft, mouseTop) {
+				var $div = $('<div />'),
+					positionLeft = mouseLeft - ( $div.width() / 2 ),
+					positionTop = mouseTop - ( $div.height() / 2);
+
+				$div.addClass('circle');
+				this.container.append($div);
+
+				$div.css({
+					'top': positionTop,
+					'left': positionLeft
+				})
+
+				this.colorSetDiv($div);
+			},
+			colorSetDiv : function ( $target ) {
+				var $div = $target,
+					interger1 = Math.round(Math.random() * ( 255 - 100 ) + 100 ),
+					interger2 = Math.round(Math.random() * ( 255 - 100 ) + 100 ),
+					interger3 = Math.round(Math.random() * ( 255 - 100 ) + 100 );
+
+				$div.css({
+					'backgroundColor' : 'rgb(' + interger1 + ',' + interger2 + ',' + interger3 + ')'
+				});
+
+				this.animation($div);
+			},
+			animation : function ( $target ) {
+				var $div = $target;
+
+				setTimeout(function () {
+					// $div.addClass('animation').on('transitionend webkitTransitionEnd mozTransitionEnd', function () {
+					// 	$(this).remove();
+					// })
+					$div.animate({
+						opacity: 0,
+						width: 80,
+						height: 80,
+						top: '-=40',
+						left: '-=40'
+					}, {
+						duration: 1000,
+						easing: 'linear',
+						complete: function () {
+							$(this).remove();
+						}
+					});
+
+				}, this.animeStartTime);
+
+			}
+		}
+
+		$(function () {
+			PRC.mouseAnimation.init($('#jsi-wrapper'));
+		});
+	</script>
+</body>
+</html>	

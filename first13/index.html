@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	* {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	.wrapper {
+		width: 800px;
+		height: 800px;
+		overflow: hidden;
+		margin: 100px auto;
+		position: relative;
+	}
+	.carousel {
+		width: 3200px;
+		position: absolute;
+	}
+	.carousel li {
+		float: left;
+		width: 800px;
+		height: 800px;
+		-webkit-box-sizing: border-box;
+		   -moz-box-sizing: border-box;
+		        box-sizing: border-box;
+		font-size: 36px;
+		line-height: 800px;
+		text-align: center;
+	}
+	.btn {
+		position: absolute;
+		top: 50%;
+		margin-top: -28px;
+		padding: 20px 50px;
+		height: 56px;
+		-webkit-box-sizing: border-box;
+		   -moz-box-sizing: border-box;
+		        box-sizing: border-box;
+		background-color: #00FFFF;
+		color: #FFF;
+	}
+	.prev {
+		left: 0;
+	}
+	.next {
+		right: 0;
+	}
+	.cf:after { 
+		content: "."; 
+		display: block; 
+		height: 0;
+		clear: both; 
+		visibility: hidden;
+	}
+	</style>
+</head> 
+<body>
+	<div class="wrapper">
+		<ul id="jsi-carousel-container" class="carousel cf">
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+		</ul>
+		<a href="javascript: void();" class="btn prev" id="jsi-prev">PREV</a>
+		<a href="javascript: void();" class="btn next" id="jsi-next">NEXT</a>
+	</div>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="/first13/carousel.js"></script>
+</body> 
+</html>

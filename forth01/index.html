@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="text" size="40" value="test" name="address" />
+	<script>
+		var inp = document.getElementsByName('address');
+		console.log(inp[0].tagName);
+		console.log(inp[0].type);
+		console.log(inp[0].size);
+		console.log(inp[0].value);
+	</script>
+</body>
+</html>

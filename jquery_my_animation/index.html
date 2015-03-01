@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link href='http://fonts.googleapis.com/css?family=Fredericka+the+Great' rel='stylesheet' type='text/css'>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		.wrapper {
+			background-color: #000;
+		}
+		.circle {
+			width: 2px;
+			height: 2px;
+			-webkit-border-radius: 40px;
+			border-radius: 40px;
+			position: absolute;
+			background-color: #000;
+			opacity: 1;
+		}
+		.circle.animation {
+			-webkit-border-radius: 40px;
+			border-radius: 40px;
+		}
+		.inner {
+			position: relative;
+			display: block;
+			width: 100%;
+			height: 100%;
+		}
+		.line {
+			position: absolute;
+			display: block;
+			width: 100%;
+			height: 100%;
+			border-radius: 50%;
+			box-shadow: 0 0 190px 40px #FFF; 
+		}
+		.time {
+			position: fixed;
+			width: 270px;
+			right: 50px;
+			bottom: 50px;
+			color: #FFF;
+			font-size: 24px;
+			font-family: 'Fredericka the Great', cursive;
+		}
+		.link-wrap {
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			margin: -25px 0 0 -150px;
+		}
+		.link {
+			background-color: #FAFAFA;
+			display: block;
+			color: #111;
+			line-height: 50px;
+			height: 50px;
+			width: 300px;
+			box-shadow: 0 1px 2px 3px #FFeeee;
+			border-radius: 20px;
+			text-align: center;
+			text-decoration: none;
+			overflow: hidden;
+			-webkit-transition: all .2s linear;
+			-moz-transition: all .2s linear;
+			transition: all .2s linear;
+		}
+		.link:hover {
+			background-color: #111;
+			color: #FFF;
+		}
+		.cover {
+			position: absolute;
+			background-color: #FAFAFA;
+			z-index: 100;
+			opacity: .2;
+			border-style: solid;
+			border-color: #FAFAFA;
+			border-width: 0;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrapper" id="jsi-wrapper">
+		<p id="jsi-time" class="time"></p>
+		<p class="link-wrap"><a href="/jquery_mouse_animation/" class="jsc-link link">To Mouse animation</a></p>
+	</div>
+	<script src="/jquery/jquery.js"></script>
+	<script>
+		var PRC = window.PRC || {};
+
+		PRC.myAnimation = {
+			init : function ($container) {
+				this.container = $container;
+				this.animeStartTime = 100;
+				this.windowW = $(window).width(),
+				this.windowH = $(window).height();
+
+				this.sizing();
+			},
+			sizing : function () {
+				this.container.width(this.windowW);
+				this.container.height(this.windowH);
+
+				this.position();
+			},
+			position : function () {
+				var element = this,
+					positionX,
+					positionY,
+					mouseLeft,
+					mouseTop;
+					
+				setInterval( function () {
+						positionX = Math.round(Math.random() * element.windowW),
+						positionY = Math.round(Math.random() * element.windowH );
+					element.createDiv(positionX, positionY);
+				}, 100);
+
+
+			},
+			createDiv : function ( mouseLeft, mouseTop) {
+				var $div = $('<div />'),
+					$span = $('<span />'),
+					positionLeft = mouseLeft - ( $div.width() / 2 ),
+					positionTop = mouseTop - ( $div.height() / 2);
+
+				$div.addClass('circle');
+				$span.addClass('inner');
+				this.container.append($div);
+
+				$div.append($span);
+				$span.html('<span class="line"></span>')
+
+				$div.css({
+					'top': positionTop,
+					'left': positionLeft
+				})
+
+				this.colorSetDiv($div);
+			},
+			colorSetDiv : function ( $target ) {
+				var $div = $target,
+					interger1 = Math.round(Math.random() * ( 255 - 100 ) + 100 ),
+					interger2 = Math.round(Math.random() * ( 255 - 100 ) + 100 ),
+					interger3 = Math.round(Math.random() * ( 255 - 100 ) + 100 );
+
+				$div.css({
+					'backgroundColor' : 'rgb(' + interger1 + ',' + interger2 + ',' + interger3 + ')'
+				});
+
+				this.animation($div);
+			},
+			animation : function ( $target ) {
+				var $div = $target;
+
+				setTimeout(function () {
+					$div.animate({
+						opacity: 0,
+						width: 80,
+						height: 80,
+						top: '-=40',
+						left: '-=40'
+					}, {
+						duration: 1000,
+						easing: 'linear',
+						complete: function () {
+							$(this).remove();
+						}
+					});
+
+				}, this.animeStartTime);
+
+			},
+			time : function () {
+				var $target = $('#jsi-time');
+
+				setInterval(function () {
+					var date = new Date();
+					year = date.getUTCFullYear(),
+					month = date.getUTCMonth() + 1,
+					day = date.getUTCDay(),
+					today = date.getUTCDate(),
+					time = new Date(),
+					hour = time.getUTCHours() + 9,
+					minute = time.getUTCMinutes(),
+					second = time.getUTCSeconds();
+
+				var englishDay = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+				if ( hour >= 24 ) {
+					hour -= 24;
+				}
+				if ( second < 10 ) {
+					second = '0' + second; 
+				}
+				var now =  year + '.' + month + '.' + today + '.' + englishDay[day] + '  ' + hour + '.' + minute + '.' + second;
+
+				$target.text(now);
+				}, 100);
+				
+			},
+			location : function () {
+				var element = this,
+					anchor = $('.jsc-link');
+
+				var $cover = $('<div />');
+					$cover.addClass('cover');
+
+				this.container.append($cover);
+
+				$cover.css({
+					'width' : this.windowW,
+					'height' : this.windowH,
+					'left' : - this.windowW
+				})
+
+				anchor.on('click', function () {
+					event.preventDefault();
+					var href = $(this).attr('href');
+
+					$cover.animate({
+						'left' : 0
+					}, {
+						duration: 500,
+						complete: function () {
+							$(this).animate({
+								'opacity' : .9
+							}, {
+								duration: 600,
+								easing: 'swing',
+								complete: function () {
+									$(this).css({
+										'border-color' : '#AAA',
+									});
+									$(this).animate({
+										'border-top-width': element.windowH / 2,
+										'border-bottom-width': element.windowH / 2,
+										'border-left-width': element.windowW / 2,
+										'border-right-width': element.windowW / 2,
+										'width' : 0,
+										'height' : 0,
+										'opacity' : 1
+									}, {
+										duration: 300,
+										easing: 'swing',
+										complete: function () {
+											location.href = href;
+										}
+									})
+								}
+							});
+						}
+					});
+
+				});
+			}
+		}
+
+		$(function () {
+			PRC.myAnimation.init($('#jsi-wrapper'));
+			PRC.myAnimation.time();
+			PRC.myAnimation.location();
+		});
+	</script>
+</body>
+</html>	

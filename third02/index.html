@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+
+	var incrementor = {
+		num : 1,
+		increment : function() {
+			if ( this.num > 10 ) {
+				this.num = 1;
+			}
+			console.log(this.num);
+			this.num++;
+		}
+	};
+
+	for( var i = 0; i < 100; i++ ){
+		incrementor.increment(); 
+	}
+
+	</script>
+</body>
+</html>

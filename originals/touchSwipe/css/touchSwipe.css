@@ -1,0 +1,126 @@
+@charset "utf-8";
+
+/* RESET */
+* {
+	margin: 0;
+	padding: 0;
+}
+li {
+	list-style: none;
+}
+
+/*====================
+ COMMON 
+ ====================*/
+.carousel {
+	overflow-x: hidden;
+	position: relative;
+}
+.carousel-list {
+	display: -webkit-box;
+	display: -moz-box;
+	display: box;
+	-webkit-box-pack: center;
+	-moz-box-pack: center;
+	box-pack: center;
+	position: absolute;
+	left: 0;
+	-webkit-transition: left 300ms ease;
+	   -moz-transition: left 300ms ease;
+	        transition: left 300ms ease;
+}
+.carousel-list li {
+	-webkit-box-flex: 1;
+	-moz-box-flex: 1;
+	box-flex: 1;
+}
+.btn-carousel {
+	position: absolute;
+	top: 50%;
+	text-decoration: none;
+}
+.btn-prev {
+	left: 0;
+}
+.btn-next {
+	right: 0;
+}
+.indicator {
+	display: -webkit-box;
+	display: -moz-box;
+	display: box;
+	-webkit-box-pack: center;
+	-moz-box-pack: center;
+	box-pack: center;
+}
+.indicator a {
+	display: block;
+}
+
+
+/* ---------------
+ EXAMPLE 
+-----------------*/
+.carousel-container {
+	margin: 100px auto;
+	width: 600px;
+}
+@media screen and ( max-width: 700px ) {
+	.carousel-container {
+		width: 100%;
+	}
+}
+.carousel {
+	width: 100%;
+	height: 300px;
+	line-height: 300px;
+	color: #eee;
+	font-size: 14px;
+	text-align: center;
+	background-color: #aaa;
+}
+.btn-carousel {
+	background-color: #fafafa;
+	color: #666;
+	font-weight: bold;
+	border-radius: 3px;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	margin-top: -20px;
+	opacity: .6;
+	-webkit-transition: opacity 300ms ease;
+	   -moz-transition: opacity 300ms ease;
+	        transition: opacity 300ms ease;
+}
+.btn-carousel:hover {
+	opacity: 1;
+}
+.carousel li:first-child  { background-color: #123; }
+.carousel li:nth-child(2) { background-color: #456; }
+.carousel li:nth-child(3) { background-color: #789; }
+.carousel li:nth-child(4) { background-color: #abc; }
+.carousel li:nth-child(5) { background-color: #ef1; }
+.carousel li:nth-child(6) { background-color: #234; }
+.carousel li:nth-child(7) { background-color: #567; }
+.carousel li:nth-child(8) { background-color: #89a; }
+.carousel li:nth-child(9) { background-color: #bcd; }
+.indicator {
+	margin-top: 20px;
+}
+.indicator li {
+	padding: 0 5px;
+}
+.indicator a {
+	width: 20px;
+	height: 20px;
+	border-radius: 10px;
+	background-color: #ccc;
+}
+.indicator .current a {
+	background-color: #f33;
+}
+.btn-prev {
+	display: none;
+}

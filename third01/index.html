@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var count = {};
+
+		count  = {
+			addNum : function ( num1, num2 ) {
+				var answer = num1 + num2;
+
+				return answer;
+			},
+			cutNum : function ( num1, num2 ) {
+				var answer = num1 - num2;
+
+				return answer;
+			}
+		}
+
+		var result1 = count.addNum( 300, 200 );
+		console.log(result1); 
+
+		var result2 = count.cutNum( 300, 200 );
+		console.log(result2); 
+
+	</script>
+</body>
+</html>

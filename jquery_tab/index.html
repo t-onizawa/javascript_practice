@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		.wrapper {
+			background: #F1F1F1;
+		}
+		.contents {
+			width: 960px;
+			margin: 0 auto;
+		}
+		.tab {
+			display: -webkit-box;
+		}
+		.tab li {
+			width: 33.33%;
+			-webkit-box-flex: 1;
+		}
+		.tab a {
+			display: block;
+			padding: 20px 0;
+			text-align: center;
+			border: 1px solid #EEE;
+		}
+		.tab-inner {
+			position: relative;
+			width: 960px;
+			height: 800px;
+		}
+		.tab-inner li {
+			position: absolute;
+			width: 960px;
+			height: 800px;
+		}
+		.tab li:first-child a,
+		.tab-inner li:first-child {
+			background-color: #F33;
+		}
+		.tab li:nth-child(2) a,
+		.tab-inner li:nth-child(2) {
+			background-color: #FF3;
+		}
+		.tab li:nth-child(3) a,
+		.tab-inner li:nth-child(3) {
+			background-color: #3F3;
+		}
+		.tab-inner .selected {
+			z-index: 10;
+		}
+	</style>
+</head>
+<body>
+	<div class="wapper">
+		<div class="contents">
+			<ul class="tab" id="jsi-trigger-wrap">
+				<li><a href="#tab1" class="jsc-tab-trigger">Tab1</a></li>
+				<li><a href="#tab2" class="jsc-tab-trigger">Tab2</a></li>
+				<li><a href="#tab3" class="jsc-tab-trigger">Tab3</a></li>
+			</ul>
+			<ul class="tab-inner" id="jsi-inner-wrap">
+				<li id="tab1" class="jsc-tab-inner"></li>
+				<li id="tab2" class="jsc-tab-inner"></li>
+				<li id="tab3" class="jsc-tab-inner"></li>
+			</ul>
+		</div>
+	</div>
+	<script src="/jquery/jquery.js"></script>
+	<script>
+		var Tab = window.Tab || {};
+		Tab = {
+			change : function ($triggerWrap, $innerWrap) {
+				var $trigger = $triggerWrap.find('.jsc-tab-trigger'),
+					$inner = $innerWrap.find('.jsc-tab-inner');
+
+				$trigger.on('click', function (event) {
+
+					event.preventDefault();
+
+					var $this = $(this),
+						$link = $(this.hash);
+
+					$inner.removeClass('selected').hide();
+					$link.addClass('selected').show();
+					
+				});
+
+			}
+		}
+		$(function () {
+			Tab.change($('#jsi-trigger-wrap'), $('#jsi-inner-wrap'));
+		});	
+	</script>
+</body>
+</html>

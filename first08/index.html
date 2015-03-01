@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script>
+		var fizzBuzz = function(){
+			var answer;
+			for ( var i = 1; i <= 100; i++ ) {
+				
+				if ( i % 3 === 0 && i % 5 === 0 ) {
+					answer = "Fizz Buzz";
+				} else if ( i % 3 === 0 ) {
+					answer = "Fizz";
+				} else if ( i % 5 === 0 ) {
+					answer = "Buzz";
+				} else {
+					answer = i;
+				}
+				console.log(answer);
+			}
+
+		};
+		fizzBuzz();
+
+	</script>
+</body>
+</html>

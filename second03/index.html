@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function getMax(data){
+			var array = [];
+			var array = data;
+			var max = 0;
+			for(var i = 0; i < array.length; i++){ 
+				var num = array[i];
+				if ( max < num ) {
+					max = num;
+				}
+			}
+
+			return max;
+		}
+		var result = getMax([2, 5, 1, 9, 8]); 
+		console.log(result); // 9と表示
+	</script>
+</body>
+</html>

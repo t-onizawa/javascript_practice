@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html> 
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style>
+	.element1{
+		width:1000px; 
+		height:300px;
+		margin:40px;
+		background-color:#808080;
+	} 
+	.element2{
+		position:relative; 
+		width:1000px; 
+		height:400px; 
+		padding:30px; 
+		background-color:#808080;
+	} 
+	.element3{
+		width:200px;
+		height:100px;
+		margin:20px;
+		float:left; 
+		background-color:#404040;
+	} 
+	.element4 {
+		width:200px; 
+		height:200px; 
+		margin:30px;
+		float:left; 
+		background-color:#404040
+	}
+</style>
+</head>
+<body>
+<div class="element1"></div>
+<div class="element2">
+	<div class="element3"></div>
+	<div id="target" class="element4"></div>
+</div>
+</body>
+<script type="text/javascript">
+	var target = document.getElementById('target');
+	var topOffset = target.offsetTop + target.offsetParent.offsetTop;
+	var leftOffset = target.offsetLeft + target.offsetParent.offsetLeft;
+	
+	console.log(topOffset);
+	console.log(leftOffset);
+</script>
+</html>

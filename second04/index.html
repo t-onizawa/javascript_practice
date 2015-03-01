@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function bubbleSort(data){
+			var anum = 0,
+				inum = 0;
+			for ( var i = 0; i < data.length; i++) {
+				for ( var a = 0; a < data.length; a++) {
+					if (data[a] > data[i]) {
+						anum = data[a];
+						inum = data[i];
+						data[a] = inum;
+						data[i] = anum;
+					}
+				}
+			}
+			
+			return data;
+		}
+		var result = bubbleSort([2, 5, 1, 9, 8]); 
+		console.log(result); // 1, 2, 5, 8, 9と表示
+
+	</script>
+</body>
+</html>

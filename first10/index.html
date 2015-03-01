@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	.target{
+		margin:30px auto; 
+		border:solid 1px #808080; 
+		border-collapse: collapse;
+	}
+	.target td{
+		border:solid 1px #808080; 
+		width:80px;
+		height:30px; 
+		line-height:30px; 
+		font-size:12px; 
+		text-align:center;
+	}
+	</style>
+</head> 
+<body>
+	<table class="target">
+		<tr><td>1行1列</td><td></td><td>1行3列</td><td></td><td></td></tr> <tr><td>2行1列</td><td></td><td></td><td></td><td>2行5列</td></tr> <tr><td>3行1列</td><td>3行2列</td><td></td><td></td><td></td></tr> <tr><td>4行1列</td><td></td><td>4行3列</td><td></td><td></td></tr> <tr><td>5行1列</td><td></td><td></td><td></td><td>5行5列</td></tr> <tr><td>6行1列</td><td></td><td></td><td>6行4列</td><td></td></tr>
+	</table>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script>
+		var $target = $('.target');
+		
+		var changeTblColor = function () {
+			$target.css({
+				'background-color': '#00FFFF'
+			});
+		};
+		changeTblColor();
+
+		var changeHasTextColor = function () {
+			var $td = $('.target td');
+
+			if ( $td.text() != '' ) {
+				$(this).css({
+					'background-color' : '#FFFF00'
+				});
+			}
+		};
+		changeHasTextColor();
+		alert('解けてない');
+	</script>
+</body> 
+</html>

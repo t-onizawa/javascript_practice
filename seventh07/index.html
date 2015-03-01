@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var address = [ 
+			'user1@docomo.ne.jp', 
+			'user2@anonymous.us', 
+			'user3@leihauoli.com', 
+			'user4@softbank@co.jp', 
+			'@yahoo.co.jp'
+		];
+
+		for(var i = 0; i < address.length; i++) { 
+			if(address[i].match(/(([^@?]+)@?(.+)(.jp)$)|(([^@?]+)@?(.+)(.com)$)/)){
+				console.log(address[i].match(/(([^@?]+)@?(.+)(.jp)$)|(([^@?]+)@?(.+)(.com)$)/));
+				var a = address[i].match(/(([^@?]+)@(.+)(.jp)$)|(([^@?]+)@(.+)(.com)$)/);
+				console.log('アカウント名 =' + a[1] + ', ドメイン名 =' + a[2]); 
+			}
+		}
+	</script>
+</body>
+</html>

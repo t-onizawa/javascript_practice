@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link href='http://fonts.googleapis.com/css?family=Peralta' rel='stylesheet' type='text/css'>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		.cf:after {
+			display: block;
+			content: "";
+			clear: both;
+			height: 0;
+		}
+		.wrapper {
+			width: 880px;
+			margin: 30px auto;
+		}
+		.mogura-round {
+			background-color: #AAA;
+			-webkit-box-shadow: 0 1px 2px 3px #AAA;
+			        box-shadow: 0 1px 2px 3px #AAA;
+			padding: 0 0 20px 20px;
+			border: 10px solid #FFF;
+			-webkit-border-radius: 10px;
+			        border-radius: 10px;
+			margin-top: 20px;
+		}
+		.mogura-round li {
+			float: left;
+			width: 120px;
+			height: 100px;
+			margin: 20px 20px 0 0;
+			background-color: #FFF;
+			-webkit-box-shadow: inset 5px 0 3px #666, inset 0 3px 3px #999;
+			        box-shadow: inset 5px 0 3px #666, inset 0 3px 3px #999;
+			position: relative;
+			overflow: hidden;
+			-webkit-border-radius: 10px;
+			        border-radius: 10px;
+		}
+		.mogurap {
+			padding: 10px;
+			position: absolute;
+			top: 100px;
+			left: 50%;
+			margin-left: -60px;
+		}
+		.btn-start {
+			display: block;
+			height: 80px;
+			line-height: 80px;
+			font-size: 24px;
+			width: 180px;
+			text-align: center;
+			background-color: #D3A44F;
+			background-image: -webkit-linear-gradient(to bottom, #CEB15C 0%, #D3A44F 100%);
+			background-image: -moz-linear-gradient(top,  #CEB15C 0%, #D3A44F  100%);
+			background-image: linear-gradient(to bottom, #CEB15C 0%, #D3A44F 100%);
+			-webkit-border-radius: 10px;
+			        border-radius: 10px;
+			border: 3px solid #A1922B;
+			-webkit-box-shadow: 0 0 25px #FFF;
+			        box-shadow: 0 0 25px #FFF;
+			color: #FFF;
+			text-decoration: none;
+			text-shadow: -2px -2px 2px #888, 2px 2px 2px #A1922B;
+			-webkit-transition: all 300ms ease;
+			   -moz-transition: all 300ms ease;
+			        transition: all 300ms ease;
+		}
+		.score-area {
+			padding: 20px 30px;
+			border-radius: 10px;
+			-webkit-box-shadow: -5px 0 3px #AAA, 0 3px 3px #999;
+			        box-shadow: -5px 0 3px #AAA, 0 3px 3px #999;
+			border: 5px solid #D3A44F;
+		}
+		.btn-wrap {
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			margin: -40px 0 0 -90px;
+			z-index: 100;
+		}
+		.btn-wrap:hover a {
+			opacity: .7;
+		}
+		.overlay {
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: rgba(0,0,0, .95);
+			z-index: 10;
+			-webkit-transition: background-color 500ms ease;
+			   -moz-transition: background-color 500ms ease;
+			        transition: background-color 500ms ease;
+		}
+		.btn-wrap:hover + .overlay {
+			background-color: rgba(0,0,0, .7);
+		}
+		.score-each {
+			float: left;
+			width: 50%;
+			display: table;
+		}
+		.num-text,
+		.side-text {
+			display: table-cell;
+			font-family: 'Peralta', cursive;
+		}
+		.num-text {
+			font-size: 42px;
+			width: 200px;
+			display: block;
+			padding-right: 15px;
+			text-align: right;
+		}
+		.side-text {
+			font-size: 22px;
+		}
+		#hummer {
+			position: absolute;
+			z-index: 9999;
+			display: block;
+			width: 100px;
+			pointer-events: none;
+			-webkit-transition: transform 200ms ease-in-out;
+			   -moz-transition: transform 200ms ease-in-out;
+			        transition: transform 200ms ease-in-out;
+		}
+		#hummer.rotate {
+			-webkit-transform: rotate(-45deg);
+			   -moz-transform: rotate(-45deg);
+			        transform: rotate(-45deg);
+		}
+		.modal {
+			background-color: #fafafa;
+			border: 15px solid #ccc;
+			-webkit-box-sizing: border-box;
+			   -moz-box-sizing: border-box;
+			        box-sizing: border-box;
+			border-radius: 10px;
+			color: #333;
+			width: 600px;
+			height: 300px;
+			line-height: 300px;
+			font-size: 24px;
+			top: 50%;
+			left: 50%;
+			margin: -150px 0 0 -300px;
+			text-align: center;
+			position: fixed;
+			z-index: 10000;
+			opacity: 0;
+		}
+		.modal-point {
+			font-family: 'Peralta', cursive;
+			font-size: 78px;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrapper" id="jsi-mogura">
+		<div class="score-area cf">
+			<p class="score-each"><span id="jsi-point" class="num-text">&nbsp;</span><span class="side-text">Point</span></p>
+			<p class="score-each"><span id="jsi-time" class="num-text">&nbsp;</span><span class="side-text">Minutes</span></p>
+		</div>
+		<ul id="jsi-mogura-round" class="mogura-round cf">
+			<li>
+				<div class="mogurap jsc-mogurap"><img src="/jquery_mogura/img/mole.png" alt="mogura"></div>
+			</li>
+			<li>
+				<div class="mogurap jsc-mogurap"><img src="/jquery_mogura/img/mole.png" alt="mogura"></div>
+			</li>
+			<li>
+				<div class="mogurap jsc-mogurap"><img src="/jquery_mogura/img/mole.png" alt="mogura"></div>
+			</li>
+			<li>
+				<div class="mogurap jsc-mogurap"><img src="/jquery_mogura/img/mole.png" alt="mogura"></div>
+			</li>
+			<li>
+				<div class="mogurap jsc-mogurap"><img src="/jquery_mogura/img/mole.png" alt="mogura"></div>
+			</li>
+			<li>
+				<div class="mogurap jsc-mogurap"><img src="/jquery_mogura/img/mole.png" alt="mogura"></div>
+			</li>
+			<li>
+				<div class="mogurap jsc-mogurap"><img src="/jquery_mogura/img/mole.png" alt="mogura"></div>
+			</li>
+			<li>
+				<div class="mogurap jsc-mogurap"><img src="/jquery_mogura/img/mole.png" alt="mogura"></div>
+			</li>
+			<li>
+				<div class="mogurap jsc-mogurap"><img src="/jquery_mogura/img/mole.png" alt="mogura"></div>
+			</li>
+			<li>
+				<div class="mogurap jsc-mogurap"><img src="/jquery_mogura/img/mole.png" alt="mogura"></div>
+			</li>
+			<li>
+				<div class="mogurap jsc-mogurap"><img src="/jquery_mogura/img/mole.png" alt="mogura"></div>
+			</li>
+			<li>
+				<div class="mogurap jsc-mogurap"><img src="/jquery_mogura/img/mole.png" alt="mogura"></div>
+			</li>
+			<li>
+				<div class="mogurap jsc-mogurap"><img src="/jquery_mogura/img/mole.png" alt="mogura"></div>
+			</li>
+			<li>
+				<div class="mogurap jsc-mogurap"><img src="/jquery_mogura/img/mole.png" alt="mogura"></div>
+			</li>
+			<li>
+				<div class="mogurap jsc-mogurap"><img src="/jquery_mogura/img/mole.png" alt="mogura"></div>
+			</li>
+			<li>
+				<div class="mogurap jsc-mogurap"><img src="/jquery_mogura/img/mole.png" alt="mogura"></div>
+			</li>
+			<li>
+				<div class="mogurap jsc-mogurap"><img src="/jquery_mogura/img/mole.png" alt="mogura"></div>
+			</li>
+			<li>
+				<div class="mogurap jsc-mogurap"><img src="/jquery_mogura/img/mole.png" alt="mogura"></div>
+			</li>
+			<li>
+				<div class="mogurap jsc-mogurap"><img src="/jquery_mogura/img/mole.png" alt="mogura"></div>
+			</li>
+			<li>
+				<div class="mogurap jsc-mogurap"><img src="/jquery_mogura/img/mole.png" alt="mogura"></div>
+			</li>
+			<li>
+				<div class="mogurap jsc-mogurap"><img src="/jquery_mogura/img/mole.png" alt="mogura"></div>
+			</li>
+			<li>
+				<div class="mogurap jsc-mogurap"><img src="/jquery_mogura/img/mole.png" alt="mogura"></div>
+			</li>
+			<li>
+				<div class="mogurap jsc-mogurap"><img src="/jquery_mogura/img/mole.png" alt="mogura"></div>
+			</li>
+			<li>
+				<div class="mogurap jsc-mogurap"><img src="/jquery_mogura/img/mole.png" alt="mogura"></div>
+			</li>
+			<li>
+				<div class="mogurap jsc-mogurap"><img src="/jquery_mogura/img/mole.png" alt="mogura"></div>
+			</li>
+			<li>
+				<div class="mogurap jsc-mogurap"><img src="/jquery_mogura/img/mole.png" alt="mogura"></div>
+			</li>
+			<li>
+				<div class="mogurap jsc-mogurap"><img src="/jquery_mogura/img/mole.png" alt="mogura"></div>
+			</li>
+			<li>
+				<div class="mogurap jsc-mogurap"><img src="/jquery_mogura/img/mole.png" alt="mogura"></div>
+			</li>
+			<li>
+				<div class="mogurap jsc-mogurap"><img src="/jquery_mogura/img/mole.png" alt="mogura"></div>
+			</li>
+			<li>
+				<div class="mogurap jsc-mogurap"><img src="/jquery_mogura/img/mole.png" alt="mogura"></div>
+			</li>
+		</ul>
+		<p class="btn-wrap"><a href="javascript:void(0);" id="jsi-btn-start" class="btn-start">START</a></p>
+	</div>
+	<script src="/jquery/jquery.js"></script>
+	<script>
+	(function ($){
+		
+
+		var Moguratataki = function ($this, options) {
+			this.$container = $this;
+			this.$win = $(window),
+			this.$round = $('#jsi-mogura-round');
+			this.$roundItems = this.$round.find('li');
+			this.$target = this.$round.find($('.jsc-mogurap'));
+			this.$btn = $('#jsi-btn-start');
+			this.$point = $('#jsi-point');
+			this.$time = $('#jsi-time');
+			this.$bg = $('<div class="overlay" />');
+			this.$hummer = $('<img src="img/hummer.png" id="hummer" />');
+			this.time = options.time;
+			this.point = options.startPoint;
+			this.randomSpeed = options.randomSpeed;
+			this.startFlag = true;
+			this.clickFlag = true;
+
+			this.init();
+		}
+		Moguratataki.prototype = {
+			init: function () {
+				this.makeOverlay();
+				this.numberSet();
+				this.startGame();
+			},
+			makeOverlay: function () {
+				var self = this;
+					$document = $(document),
+					documentWidth = $document.width(),
+					documentHeight = $document.height();
+				
+				this.$container.append(this.$bg);
+
+				this.$win.on('load, resize', function () {
+					documentWidth = $document.width();
+					documentHeight = $document.height();
+
+					self.$bg.width(documentWidth).height(documentHeight);
+				});
+			},
+			numberSet: function () {
+				this.$time.text(this.time);
+				this.$point.text(this.point);
+			},
+			startGame: function () {
+				var self = this;
+
+				if (this.startFlag) {
+					this.$btn.on('click', function () {
+
+						self.startFlag = false;
+
+						$(this).parent().fadeOut();
+						self.$bg.fadeOut();
+
+						self.hummer();
+
+						self.intervalTime();
+						
+						self.moguraDisplay();
+
+
+					});
+				}
+				
+			},
+			hummer: function () {
+				var self = this,
+					mouseX, mouseY;
+
+				this.$container.append(this.$hummer);
+
+				this.$container.on('mousemove', function () {
+					mouseX = event.clientX;
+					mouseY = event.clientY;
+					self.$hummer.css({
+						top: mouseY - 30,
+						left: mouseX - 30
+					});
+				});
+
+			},
+			intervalTime: function () {
+				var self = this;
+
+				var intervalTime = setInterval(function () {
+						self.time--;
+						self.$time.text(self.time);
+						if ( self.time <= 0 ) {
+							clearInterval(intervalTime);
+							self.gameEnd();
+						}
+					}, 1000);
+			},
+			gameEnd: function () {
+				var endPoint = this.$point.text(),
+					$modal = $('<div class="modal" />');
+
+					$modal.html('<p class="modal-inner">あなたのポイントは<span class="modal-point">  ' + endPoint + '  </span>ポイントでした</p>');
+					this.$container.append($modal);
+
+					this.$hummer.fadeOut();
+					this.$bg.css({
+						'display': 'block'
+					}).animate({
+						opacity: 1
+					}, 300, 'swing');
+					$modal.animate({
+						opacity: 1
+					}, 500, 'swing');
+
+			},
+			moguraDisplay: function () {
+				var self = this;
+
+					itemLength = this.$roundItems.length;
+					itemRandNum = Math.floor( Math.random() * itemLength ),
+					inDuration = 300,
+					outDuration = 300;
+
+				if (this.randomSpeed) {
+					inDuration = 50 + Math.floor( Math.random() * 801 );
+					outDuration = 50 + Math.floor( Math.random() * 801 );
+				}
+
+				var targetOut = function ($this) {
+					$this.stop().animate({
+							top: 100
+						}, {
+							duration: outDuration,
+							easing: "linear",
+							complete: function () {
+								if (self.time <= 0) {
+									return;
+								} 
+								self.moguraDisplay();
+							}
+						});
+				};
+
+				this.$roundItems.eq(itemRandNum).find(this.$target).stop().animate({
+					top: 10
+				}, {
+					duration: inDuration,
+					easing: 'swing',
+					complete: function ($this) {
+						targetOut($(this));
+					}
+				});
+
+					this.$target.one('click', function () {
+						if (self.clickFlag) {
+
+							self.$hummer.addClass('rotate');
+							setTimeout(function () {
+								self.$hummer.removeClass('rotate');
+							}, 100);
+							self.clickFlag = false;
+							targetOut($(this));
+							self.point++;
+							self.$point.text(self.point);
+						} else {
+							self.clickFlag = true;
+						}
+					});
+				
+			}
+		};
+
+		$.fn.moguratataki = function(options){
+        	return this.each(function(){
+            	new Moguratataki($(this), options);
+        	});
+        };
+
+    })(jQuery);		
+
+		$(function () {
+			$('#jsi-mogura').moguratataki({
+				startPoint: 0,
+				time: 30,
+				randomSpeed: true
+			});
+		});
+	</script>
+</body>
+</html>	

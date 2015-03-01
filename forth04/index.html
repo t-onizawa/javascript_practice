@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<form id="target"></form>
+	<script>
+		var form = document.getElementById('target');
+
+		var span1 = document.createElement('span');
+		span1.appendChild(document.createTextNode('名前'));
+		form.appendChild(span1);
+
+		var input = document.createElement('input');
+		input.type = 'text';
+		input.size = 20;
+		form.appendChild(input);
+
+		var span2 = document.createElement('span');
+		span2.appendChild(document.createTextNode('意見'));
+		form.appendChild(span2);
+
+		var textarea = document.createElement('textarea');
+		textarea.rows = 3;
+		textarea.cols = 40;
+		form.appendChild(textarea);
+		
+	</script>
+</body>
+</html>

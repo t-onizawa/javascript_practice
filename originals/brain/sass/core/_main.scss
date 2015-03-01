@@ -1,0 +1,89 @@
+@charset "UTF-8";
+
+
+.contents {
+	font-family: 'Gorditas', cursive;
+	position: relative;
+	padding: 20px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.page-head {
+	font-size: 46px;
+}
+.point-wrap {
+	font-size: 28px;
+}
+.point {
+	font-size: 36px;
+	padding-left: 30px;
+}
+.sec-head {
+	font-size: 24px;
+}
+.main {
+	font-size: 43px;
+}
+.num-list {
+	position: absolute;
+	z-index: 100;
+	bottom: 0;
+	width: 100%;
+	background-color: rgba(210,210,210,.5);
+	ul {
+		width: 500px;
+		margin: 0 auto;
+	}
+	li {
+		float: left;
+		width: 33.33%;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+		border-left: 1px solid rgba(0,0,0,.2);
+		border-bottom: 1px solid rgba(0,0,0,.2);
+		&:nth-child(3n), 
+		&:last-child {
+			border-right: 1px solid rgba(0,0,0,.2);
+		} 
+	}
+	a {
+		display: block;
+		text-align: center;
+		padding: 20px 0;
+		height: 40px;
+		line-height: 40px;
+		font-size: 40px;
+	}
+}
+.number-btn {
+	height: 80px;
+	width: 100%;
+	border: none;
+	background-color: transparent;
+	font-size: 36px;
+	color: #666;
+	cursor: pointer;
+}
+.bg-num-list {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	background: url(../img/sky.jpg) no-repeat;
+	background-size: cover;
+	&.filter {
+		-webkit-filter: blur(4px);
+	}
+}
+.num-list,
+.bg-num-list {
+		-webkit-transition: all 500ms ease;
+		-moz-transition: all 500ms ease;
+		transition: all 500ms ease;
+	&.over {
+	    -webkit-transform: translateY(1000px);
+	    -moz-transform: translateY(1000px);
+	    transform: translateY(1000px);
+	}
+}

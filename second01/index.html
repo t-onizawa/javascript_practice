@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var oparationsA = function ( x, y, a ) {
+			var num;
+			if (a) {
+				num = x + y;
+			} else if (!a) {
+				num = x - y;
+			}
+
+			return num
+		};
+
+		var answerA = oparationsA(100, 10, true);
+		console.log(answerA);
+		var answerB = oparationsB(100, 10, false);
+		console.log(answerB);
+
+		function oparationsB ( x, y, a ) {
+			var num;
+			if (a) {
+				num = x + y;
+			} else if (!a) {
+				num = x - y;
+			}
+
+			return num
+		};
+
+		var answerC = oparationsB(10, 10, true);
+		console.log(answerC);
+		var answerD = oparationsB(10, 10, false);
+		console.log(answerD);
+
+	</script>
+</body>
+</html>

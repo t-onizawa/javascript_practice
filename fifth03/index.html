@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div {
+			width: 100px;
+			height: 100px;
+			background-color: #00F;
+			margin: 100px;
+			display: inline-block;
+		}
+	</style>
+</head>
+<body>
+	
+	<div></div>
+	<div></div>
+	
+	<script>
+		// var divs = document.getElementsByTagName('div');
+
+		// for ( var i = 0; i < divs.length; i++ ) {
+		// 	divs[i].onmouseover = function () {
+		// 		this.style.backgroundColor = '#F00'
+		// 	}
+		// 	divs[i].onmouseout = function () {
+		// 		this.style.backgroundColor = '#00F'
+		// 	}
+		// }
+		var element = document.getElementsByTagName('div'); 
+		for ( var i = 0; i < element.length; i++ ) {
+			addListener(element[i], 'mouseover', function () {
+				this.style.backgroundColor = '#F00'
+			}, false);
+
+			addListener(element[i], 'mouseout', function () {
+				this.style.backgroundColor = "#00F"
+			}, false);
+
+			function addListener(element, eventType, functionP, capture){ 
+				if ( element.addEventListener ) {
+					element.addEventListener(eventType, functionP, capture); 
+				} else {
+					element.attachEvent('on' + eventType, functionP); 
+				}
+			}
+		}
+
+		
+		
+	</script>
+</body>
+</html>

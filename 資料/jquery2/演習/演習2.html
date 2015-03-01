@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+    <style type="text/css">
+        .accordion{
+            width: 300px;
+            border-bottom: solid 1px #808080;
+            margin: 30px auto;
+            padding: 0px;
+        }
+        .accordion dt{
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            margin: 0px;
+            width: 300px;
+            padding: 10px;
+            text-align: center;
+            border-top: solid 1px #808080;
+            border-left: solid 1px #808080;
+            border-right: solid 1px #808080;
+            background-color: #E0E0E0;
+            cursor: pointer;
+        }
+        .accordion dd{
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            margin: 0px;
+            width: 300px;
+            padding: 10px;
+            text-align: left;
+            border-top: solid 1px #808080;
+            border-left: solid 1px #808080;
+            border-right: solid 1px #808080;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <dl class="accordion">
+        <dt id="menu">メニュー</dt>
+        <dd id="contents">コンテンツコンテンツコンテンツコンテンツコンテンツコンテンツコンテンツコンテンツコンテンツコンテンツコンテンツコンテンツコンテンツコンテンツコンテンツコンテンツコンテンツコンテンツコンテンツコンテンツ</dd>
+    </dl>
+</body>
+<script type="text/javascript">
+$(function () {
+    var $contents = $('.accordion dd');
+    var contentsHeight = $contents.outerHeight();
+    var contentsPTop = $contents.css('padding-top');
+    var contentsPBtm = $contents.css('padding-bottom');
+
+    $('.accordion dt').on('click', function () {
+        $contents.css('display', 'block');
+        $contents.animate({
+            height: contentsHeight,
+            'padding-top': contentsPTop,
+            'padding-bottom': contentsPBtm
+        }, 1000, 'linear');
+    });
+});
+</script>
+</html>

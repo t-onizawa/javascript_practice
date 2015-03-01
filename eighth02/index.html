@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+<script>
+	Array.prototype.number = function(){
+		for (var i = 0; i < this.length; i++) {
+			if (isNaN(this[i])) {
+				this.splice(i, 1);
+			} 
+		}
+	};
+	var data = [ 1, 'two', 3, 4, 'five', 'six', 7, 8, 'nine', 10 ];
+	data.number();
+	console.log(data); // [1, 3, 4, 7, 8, 10]と表示
+</script>
+</body>
+</html>
